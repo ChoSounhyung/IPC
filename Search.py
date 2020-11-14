@@ -1,10 +1,6 @@
-import openpyxl
-of = openpyxl.load_workbook('./data/ip_dummy.xlsx')
-sheet = of.active
+import pandas as pd
 
-col_range = sheet['B:C']
+csv_file = pd.read_csv('./data/real_ip.csv', index_col=False)
 
-a = int(input("번호 입력 : "))
-print('pc\t\t\t\tphone')
-for i in col_range:
-    print(f'10.96.122.' + str(i[a-1].value) , end='\t')
+a = csv_file[csv_file['hakbun'] == 1401]
+print(csv_file.loc[[1], ['pc', 'phone']])
