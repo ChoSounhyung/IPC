@@ -19,6 +19,7 @@ class MyPc :
 
     def add_reason(self):
         #100점이 아닐 경우, 이유를 적고 데이터 전송
+        #commit test
         pass
 
     def show_data(self):
