@@ -37,6 +37,18 @@ class Search :
         finally:
             conn.close()
 
+    #db insert
+    def insert_data(self):
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ip")
+        try:
+            with conn.cursor() as curs:
+                sql = "INSERT INTO ip_table VALUES (%s, %s, %s)"
+                curs.execute(sql, (self.student_num, self.ip_address, self.phone_address))
+            conn.commit()
+        finally:
+            conn.close()
+
+
 if __name__ == '__main__':
     s = Search(2410,'10.96.122.139','10.96.122.140')
     s.select_all()
