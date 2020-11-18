@@ -1,4 +1,5 @@
 from model.Student import Student
+import pymysql
 
 class Search :
 
@@ -22,9 +23,23 @@ class Search :
         #인터넷 사용여부
         pass
 
+    #db select
+    def select_all(self):
+        conn = pymysql.connect(host="localhost",user="root",password="123456",db="ip")
+        try :
+            with conn.cursor() as curs :
+                sql = "SELECT * FROM ip_table"
+                curs.execute(sql)
+                rs = curs.fetchall()
+
+                for row in rs :
+                    print(row)
+        finally:
+            conn.close()
+
 if __name__ == '__main__':
     s = Search(2410,'10.96.122.139','10.96.122.140')
-    print(s)
+    s.select_all()
 
 
 
