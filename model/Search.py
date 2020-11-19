@@ -48,10 +48,23 @@ class Search :
         finally:
             conn.close()
 
+    #db search (select)
+    def search_ip(self,hakbun):
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ip")
+        try:
+            with conn.cursor() as curs:
+                sql = "SELECT * FROM ip_table WHERE hakbun = %s"
+                curs.execute(sql,hakbun)
+                rs = curs.fetchone()
+
+                print(f'학번 : {rs[0]}  ip : {rs[1]}  phone : {rs[2]}')
+        finally:
+            conn.close()
+
 
 if __name__ == '__main__':
     s = Search(2410,'10.96.122.139','10.96.122.140')
-    s.select_all()
+    s.search_ip(2410)
 
 
 
