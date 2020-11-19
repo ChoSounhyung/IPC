@@ -61,10 +61,25 @@ class Search :
         finally:
             conn.close()
 
+    #internet o or x
+    def check_internet(self):
+        import socket
+        try :
+            socket.gethostbyaddr(self.ip_address)
+            print("connected")
+        except socket.herror :
+            print("Not connected")
+
+        try :
+            socket.gethostbyaddr(self.phone_address)
+            print("connected")
+        except socket.herror :
+            print ("Unknown host")
+
 
 if __name__ == '__main__':
     s = Search(2410,'10.96.122.139','10.96.122.140')
-    s.search_ip(2410)
+    s.check_internet()
 
 
 
