@@ -1,4 +1,5 @@
 from model.Student import Student
+import pymysql
 
 class Search :
 
@@ -22,9 +23,63 @@ class Search :
         #인터넷 사용여부
         pass
 
+    #db select
+    def select_all(self):
+        conn = pymysql.connect(host="localhost",user="root",password="123456",db="ip")
+        try :
+            with conn.cursor() as curs :
+                sql = "SELECT * FROM ip_table"
+                curs.execute(sql)
+                rs = curs.fetchall()
+
+                for row in rs :
+                    print(row)
+        finally:
+            conn.close()
+
+    #db insert
+    def insert_data(self):
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ip")
+        try:
+            with conn.cursor() as curs:
+                sql = "INSERT INTO ip_table VALUES (%s, %s, %s)"
+                curs.execute(sql, (self.student_num, self.ip_address, self.phone_address))
+            conn.commit()
+        finally:
+            conn.close()
+
+    #db search (select)
+    def search_ip(self,hakbun):
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ip")
+        try:
+            with conn.cursor() as curs:
+                sql = "SELECT * FROM ip_table WHERE hakbun = %s"
+                curs.execute(sql,hakbun)
+                rs = curs.fetchone()
+
+                print(f'학번 : {rs[0]}  ip : {rs[1]}  phone : {rs[2]}')
+        finally:
+            conn.close()
+
+    #internet o or x
+    def check_internet(self):
+        import socket
+        try :
+            socket.gethostbyaddr(self.ip_address)
+            print("connected")
+        except socket.herror :
+            print("Not connected")
+
+        try :
+            socket.gethostbyaddr(self.phone_address)
+            print("connected")
+        except socket.herror :
+            print ("Unknown host")
+
+
 if __name__ == '__main__':
     s = Search(2410,'10.96.122.139','10.96.122.140')
-    print(s)
+    s.check_internet()
 
 
 
