@@ -7,7 +7,7 @@ class Search :
         self.ip_address = ip
         self.phone_address = phone
         self.internet_use = False
-        self.student_num = Student(num).student_num
+        self.student_num = num
 
     def __str__(self):
         return Student.__str__(self)+f'\n학생의 ip 주소는 {self.ip_address}이고,' \
@@ -25,7 +25,7 @@ class Search :
 
     #db select
     def select_all(self):
-        conn = pymysql.connect(host="localhost",user="root",password="123456",db="ip")
+        conn = pymysql.connect(host="localhost",user="root",password="123456",db="ipc")
         try :
             with conn.cursor() as curs :
                 sql = "SELECT * FROM ip_table"
@@ -39,7 +39,7 @@ class Search :
 
     #db insert
     def insert_data(self):
-        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ip")
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         try:
             with conn.cursor() as curs:
                 sql = "INSERT INTO ip_table VALUES (%s, %s, %s)"
@@ -49,14 +49,14 @@ class Search :
             conn.close()
 
     #db search (select)
-    def search_ip(self,hakbun):
-        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ip")
+    def search_ip(self,num):
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         try:
             with conn.cursor() as curs:
                 sql = "SELECT * FROM ip_table WHERE hakbun = %s"
-                curs.execute(sql,hakbun)
+                curs.execute(sql,num)
                 rs = curs.fetchone()
-
+                print(rs)
                 print(f'학번 : {rs[0]}  ip : {rs[1]}  phone : {rs[2]}')
         finally:
             conn.close()
@@ -78,8 +78,8 @@ class Search :
 
 
 if __name__ == '__main__':
-    s = Search(2410,'10.96.122.139','10.96.122.140')
-    s.check_internet()
+    s = Search(1110,'10.96.122.139','10.96.122.140')
+    s.search_ip(s.student_num)
 
 
 
