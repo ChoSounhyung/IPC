@@ -17,12 +17,33 @@ class MyPc :
     def set_score(self):
         pass
 
-    def add_reason(self):
-        #100점이 아닐 경우, 이유를 적고 데이터 전송
+    #학생 - 점수 저장하기
+    def input_data(self):
         pass
 
+    #100점이 아닐경우, 이유 적는 창 띄우기
+    def add_reason(self):
+
+        pass
+
+    #선생님 - 점수 보여주기
     def show_data(self):
         #선생님 화면
-        #1-1, 1-2, 1-3, 2 (기획서)
+        #100점이 아닐 경우, 행의 색(노란색)으로 표현
         pass
+
+    #100점 미만인 학생만 보여주기
+    def under_100(self):
+        pass
+
+    #내 PC 지키미를 안 한 학생만 보여주기
+    #초기화한 상태에서 0점인 애들만
+    def do_not_myPc(self):
+        pass
+
+    #반별로 통계 보여주기
+    def show_class_statistics(self):
+        pass
+
+
 
