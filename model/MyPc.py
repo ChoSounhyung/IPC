@@ -1,4 +1,6 @@
 from model.Student import Student
+import pymysql
+
 class MyPc :
 
     def __init__(self,num,score):
@@ -19,7 +21,14 @@ class MyPc :
 
     #학생 - 점수 저장하기
     def input_data(self):
-        pass
+        conn = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        try:
+            with conn.cursor() as curs:
+                sql = "INSERT INTO mypc_table VALUES (%s, %s, %s)"
+                curs.execute(sql, (self.student_num, self.ip_address, self.phone_address))
+            conn.commit()
+        finally:
+            conn.close()
 
     #100점이 아닐경우, 이유 적는 창 띄우기
     def add_reason(self):
