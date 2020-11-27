@@ -79,7 +79,7 @@ class Search :
 
 if __name__ == '__main__':
     s = Search(1110,'10.96.122.139','10.96.122.140')
-    s.search_ip(s.student_num)
+    s.select_all()
 
 
 

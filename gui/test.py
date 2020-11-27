@@ -1,12 +1,5 @@
-from tkinter import *
+import datetime
 
-def teacher():
-    window = Tk()
-    window.title("IPC")
-    window.config(bg='#272727')
-    window.geometry("1000x650+250+70")
-    window.resizable(False, False)
-    window.mainloop()
-
-if __name__ == '__main__':
-    teacher()
+this_year = datetime.datetime.today().year
+this_month = datetime.date.today().month
+print(str(this_year)+' '+str(this_month))
