@@ -1,7 +1,7 @@
 from tkinter import *
-from start_page import StartPage
-from student_page import StudentPage
-from teacher_page import TeacherPage
+from gui.start_page import StartPage
+from gui.student_page import StudentPage
+from gui.teacher_page import TeacherPage
 
 def main():
     StartPage()

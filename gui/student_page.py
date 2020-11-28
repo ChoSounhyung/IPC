@@ -1,4 +1,5 @@
 from tkinter import *
+from gui.search_ip import SearchIp
 
 class StudentPage:
     def __init__(self):
@@ -22,6 +23,7 @@ class StudentPage:
 
     def go_search_ip_page(self):
         self.window.destroy()
+        SearchIp()
 
     def go_mypc_page(self):
         self.window.destroy()
