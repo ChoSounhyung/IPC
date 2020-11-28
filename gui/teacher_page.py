@@ -1,69 +1,35 @@
 from tkinter import *
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
-import pymysql
 
-def update(rows) :
-    trv.delete(*trv.get_children())
-    for i in rows :
-        trv.insert('','end',values=i)
+class TeacherPage:
+    def __init__(self):
+        self.window = Tk()
+        self.window.title("IPC")
+        self.window.geometry("1000x650+250+70")
+        self.window.config(bg='#272727')
+        self.window.resizable(False, False)
 
-def search():
-    q2 = q.get()
-    query = "SELECT * from mypc_table where score=0"
-    cursor.execute(query)
-    rows = cursor.fetchall()
-    update(rows)
+        did_not_start_image = PhotoImage(file='../image/did_not_start_btn.png')
+        did_not_start_click = Button(borderwidth=0, command=self.go_did_not_start_page, bg='#272727', activebackground='#272727')
+        did_not_start_click.place(x=50, y=180, anchor='nw')
+        did_not_start_click.config(image=did_not_start_image)
 
-def clear():
-    query = "SELECT hakbun, this_month, score, reason from mypc_table"
-    cursor.execute(query)
-    rows = cursor.fetchall()
-    update(rows)
+        not_perfect_image = PhotoImage(file='../image/not_perfect_btn.png')
+        not_perfect_click = Button(borderwidth=0, command=self.go_not_perfect_page, bg='#272727', activebackground='#272727')
+        not_perfect_click.place(x=340, y=180, anchor='nw')
+        not_perfect_click.config(image=not_perfect_image)
 
-#db connect
-mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
-cursor = mydb.cursor()
+        best_class_image = PhotoImage(file='../image/best_class_btn.png')
+        best_class_click = Button(borderwidth=0, command=self.go_best_class_page, bg='#272727', activebackground='#272727')
+        best_class_click.place(x=705, y=180, anchor='nw')
+        best_class_click.config(image=best_class_image)
 
-root = Tk()
-q = StringVar()
-wrapper = LabelFrame(root,text="내 PC 지키미")
-wrapper2 = LabelFrame(root,text="버튼 메뉴")
-wrapper3 = LabelFrame(root,text="Search")
+        self.window.mainloop()
 
-wrapper.pack(fill="both",expand="yes",padx=20,pady=10)
-wrapper2.pack(fill="both",expand="yes",padx=20,pady=10)
-wrapper3.pack(fill="both",expand="yes",padx=20,pady=10)
+    def go_did_not_start_page(self):
+        self.window.destroy()
 
-trv = ttk.Treeview(wrapper, columns=(1,2,3,4), show="headings", height="10")
-trv.pack()
+    def go_not_perfect_page(self):
+        self.window.destroy()
 
-trv.column("#1",width=100,anchor="center")
-trv.heading(1, text='학번',anchor="center")
-
-trv.column("#2",width=100,anchor="center")
-trv.heading(2, text='이번 달',anchor="center")
-
-trv.column("#3",width=100,anchor="center")
-trv.heading(3, text='score',anchor="center")
-
-trv.column("#4",width=200,anchor="center")
-trv.heading(4, text='reason',anchor="center")
-
-query = "SELECT hakbun, this_month, score, reason from mypc_table"
-cursor.execute(query)
-rows = cursor.fetchall()
-update(rows)
-
-#버튼 메뉴 부분 속성들
-lbl = Label(wrapper2, text="버튼 메뉴")
-lbl.place(x=10,y=10,anchor='nw')
-btn1 = Button(wrapper2, text="내 PC지키미 안한 사람 보기", command=search)
-btn1.place(x=80,y=10,anchor='nw')
-clear_btn = Button(wrapper2, text="전체 데이터 보기", command=clear)
-clear_btn.place(x=250,y=10,anchor='nw')
-
-root.title("MY PC")
-root.geometry("600x700")
-root.mainloop()
+    def go_best_class_page(self):
+        self.window.destroy()
