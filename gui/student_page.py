@@ -14,8 +14,7 @@ class StudentPage:
         search_ip_click.config(image=search_ip_image)
 
         mypc_image = PhotoImage(file='../image/mypc_prot_btn.png')
-        mypc_click = Button(borderwidth=0, command=self.go_search_ip_page, bg='#272727',
-                                 activebackground='#272727')
+        mypc_click = Button(borderwidth=0, command=self.go_search_ip_page, bg='#272727', activebackground='#272727')
         mypc_click.place(x=540, y=180, anchor='nw')
         mypc_click.config(image=mypc_image)
 

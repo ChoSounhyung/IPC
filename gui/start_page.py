@@ -1,5 +1,6 @@
 from tkinter import *
 from student_page import StudentPage
+from teacher_page import TeacherPage
 
 class StartPage:
     def __init__(self):
@@ -33,3 +34,4 @@ class StartPage:
 
     def go_teacher_page(self):
         self.window.destroy()
+        TeacherPage()
