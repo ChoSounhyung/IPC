@@ -1,5 +1,6 @@
 from tkinter import *
-from gui.search_ip import SearchIp
+from gui.search_ip_page import SearchIp
+from gui.mypc_page import MyPc
 
 class StudentPage:
     def __init__(self):
@@ -15,7 +16,7 @@ class StudentPage:
         search_ip_click.config(image=search_ip_image)
 
         mypc_image = PhotoImage(file='../image/mypc_prot_btn.png')
-        mypc_click = Button(borderwidth=0, command=self.go_search_ip_page, bg='#272727', activebackground='#272727')
+        mypc_click = Button(borderwidth=0, command=self.go_mypc_page, bg='#272727', activebackground='#272727')
         mypc_click.place(x=540, y=150, anchor='nw')
         mypc_click.config(image=mypc_image)
 
@@ -33,3 +34,4 @@ class StudentPage:
 
     def go_mypc_page(self):
         self.window.destroy()
+        MyPc()
