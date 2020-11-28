@@ -23,6 +23,15 @@ class TeacherPage:
         best_class_click.place(x=705, y=180, anchor='nw')
         best_class_click.config(image=best_class_image)
 
+        self.did_not_start_text = Label(text='내 PC 지키미를\n하지 않은 사람을\n볼 수 있습니다', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
+        self.did_not_start_text.place(x=75, y=400)
+
+        self.not_perfect_text = Label(text='내 PC 지키미 점수가\n100점이 아닌 사람을\n볼 수 있습니다', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
+        self.not_perfect_text.place(x=385, y=400)
+
+        self.best_class_text = Label(text='반별 내 PC 지키미\n점수 비율을\n볼 수 있습니다', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
+        self.best_class_text.place(x=725, y=400)
+
         self.window.mainloop()
 
     def go_did_not_start_page(self):
