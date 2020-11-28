@@ -1,7 +1,9 @@
 from tkinter import *
+from gui.student_menu import *
+
+start_page_window = Tk()
 
 def main():
-    start_page_window = Tk()
     start_page_window.title("IPC")
     start_page_window.config(bg='#272727')
     start_page_window.geometry("1000x650+250+70")
@@ -26,7 +28,8 @@ def teacher_page(event):
     teacher_page_window.config(bg='#272727')
     teacher_page_window.geometry("1000x650+250+70")
     teacher_page_window.resizable(False, False)
-    TeacherPage(teacher_page_window)
+    #TeacherPage(teacher_page_window)
+    start_page_window.destroy()
     teacher_page_window.mainloop()
 
 class StartPage(Frame):
@@ -50,17 +53,6 @@ class StartPage(Frame):
         student_label.place(x=140, y=360)
         teacher_label.place(x=320, y=360)
 
-class StudentPage(Frame):
-    def __init__(self, master):
-        title = Label(master, text="IPC")
-
-        title.place(x=140, y=180, anchor='nw')
-
-class TeacherPage(Frame):
-    def __init__(self, master):
-        title = Label(text="IPC")
-
-        title.place(x=140, y=180, anchor='nw')
 
 if __name__ == '__main__':
     main()
