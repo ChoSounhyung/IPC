@@ -3,7 +3,7 @@ import xlrd
 
 tumbler = xlrd.open_workbook("data/real_ip.xlsx")
 sheet = tumbler.sheet_by_name("Sheet1")
-database = MySQLdb.connect(host="localhost",user="root",password="123456",db="ipc")
+database = MySQLdb.connect(host="localhost",user="root",password="s2019w36",db="ipc")
 
 cursor = database.cursor()
 

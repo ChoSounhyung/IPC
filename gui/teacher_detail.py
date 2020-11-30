@@ -23,7 +23,7 @@ def clear():
     update(rows)
 
 #db connect
-mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
 cursor = mydb.cursor()
 
 root = Tk()
