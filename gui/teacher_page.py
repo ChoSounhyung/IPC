@@ -1,4 +1,5 @@
 from tkinter import *
+from gui.did_not_start_mypc import DidNotStartMyPc
 
 class TeacherPage:
     def __init__(self):
@@ -36,6 +37,7 @@ class TeacherPage:
 
     def go_did_not_start_page(self):
         self.window.destroy()
+        DidNotStartMyPc()
 
     def go_not_perfect_page(self):
         self.window.destroy()

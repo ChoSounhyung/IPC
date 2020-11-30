@@ -1,7 +1,5 @@
 from tkinter import *
-import tkinter as tk
 from tkinter import ttk
-from tkinter import messagebox
 import pymysql
 
 class DidNotStartMyPc :
@@ -11,49 +9,53 @@ class DidNotStartMyPc :
         self.window.geometry("1000x650+250+70")
         self.window.config(bg='#272727')
         self.window.resizable(False, False)
+        self.trv = ttk.Treeview(columns=(1, 2, 3, 4), show="headings", height="10")
+        self.db_connect()
 
-#db connect
-mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
-cursor = mydb.cursor()
+        did_not_start_mypc = Label(text='내 PC 지키미를 안한 사람', bg='#272727', fg='#51F591',
+                                    font=("Arial 15 bold"))
+        did_not_start_mypc.place(x=50, y=70)
 
-root = Tk()
-q = StringVar()
-wrapper = LabelFrame(root,text="내 PC 지키미")
-wrapper2 = LabelFrame(root,text="버튼 메뉴")
-wrapper3 = LabelFrame(root,text="Search")
+        self.trv.place(x=50,y=150)
 
-wrapper.pack(fill="both",expand="yes",padx=20,pady=10)
-wrapper2.pack(fill="both",expand="yes",padx=20,pady=10)
-wrapper3.pack(fill="both",expand="yes",padx=20,pady=10)
+        vsb = ttk.Scrollbar(orient="vertical", command=self.trv.yview)
+        self.trv.configure(yscrollcommand=vsb.set)
 
-trv = ttk.Treeview(wrapper, columns=(1,2,3,4), show="headings", height="10")
-trv.pack()
+        style = ttk.Style()
+        style.configure("Treeview.Heading", font=("Arial 15 bold"))
+        style.configure("Treeview", rowheight=40)
 
-trv.column("#1",width=100,anchor="center")
-trv.heading(1, text='학번',anchor="center")
+        self.trv.tag_configure('style',font=("Arial 15"))
 
-trv.column("#2",width=100,anchor="center")
-trv.heading(2, text='이번 달',anchor="center")
+        self.trv.column("#1", width=200, anchor="center")
+        self.trv.heading(1, text='학번', anchor="center")
 
-trv.column("#3",width=100,anchor="center")
-trv.heading(3, text='score',anchor="center")
+        self.trv.column("#2", width=200, anchor="center")
+        self.trv.heading(2, text='이번 달', anchor="center")
 
-trv.column("#4",width=200,anchor="center")
-trv.heading(4, text='reason',anchor="center")
+        self.trv.column("#3", width=200, anchor="center")
+        self.trv.heading(3, text='score', anchor="center")
 
-query = "SELECT hakbun, this_month, score, reason from mypc_table where score=0"
-cursor.execute(query)
-rows = cursor.fetchall()
-update(rows)
+        self.trv.column("#4", width=300, anchor="center")
+        self.trv.heading(4, text='reason', anchor="center")
 
-#버튼 메뉴 부분 속성들
-lbl = Label(wrapper2, text="버튼 메뉴")
-lbl.place(x=10,y=10,anchor='nw')
-btn1 = Button(wrapper2, text="내 PC지키미 안한 사람 보기", command=search)
-btn1.place(x=80,y=10,anchor='nw')
-clear_btn = Button(wrapper2, text="전체 데이터 보기", command=clear)
-clear_btn.place(x=250,y=10,anchor='nw')
+        self.window.mainloop()
 
-root.title("MY PC")
-root.geometry("600x700")
-root.mainloop()
+
+    def update(self,rows) :
+        self.trv.delete(*self.trv.get_children())
+        for i in rows:
+            self.trv.insert('', 'end', values=i,tag='style')
+
+
+
+
+    #db connect
+    def db_connect(self) :
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        cursor = mydb.cursor()
+
+        query = "SELECT hakbun, this_month, score, reason from mypc_table where score=0"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        self.update(rows)
