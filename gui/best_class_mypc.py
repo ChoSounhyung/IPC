@@ -1,4 +1,7 @@
 from tkinter import *
+from gui.first_grade_page import FirstGradePage
+from gui.second_grade_page import SecondGradePage
+from gui.third_grade_page import ThirdGradePage
 
 class BestClassMypc:
     def __init__(self):
@@ -27,9 +30,12 @@ class BestClassMypc:
 
     def go_first_grade_page(self):
         self.window.destroy()
+        FirstGradePage()
 
     def go_second_grade_page(self):
         self.window.destroy()
+        SecondGradePage()
 
     def go_third_grade_page(self):
         self.window.destroy()
+        ThirdGradePage()
