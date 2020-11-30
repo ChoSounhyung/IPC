@@ -1,6 +1,7 @@
 from tkinter import *
 from gui.did_not_start_mypc import DidNotStartMyPc
 from gui.best_class_mypc import BestClassMypc
+from gui.not_perfect_mypc import NotPerfectMypc
 
 class TeacherPage:
     def __init__(self):
@@ -42,6 +43,7 @@ class TeacherPage:
 
     def go_not_perfect_page(self):
         self.window.destroy()
+        NotPerfectMypc()
 
     def go_best_class_page(self):
         self.window.destroy()
