@@ -24,15 +24,30 @@ class SearchIp:
         search_btn_click.place(x=805, y=50)
         search_btn_click.config(image=search_btn_image)
 
-        ip_box_image = PhotoImage(file='../image/ip_box.png')
-        ip_box_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
-        ip_box_click.place(x=125, y=180)
-        ip_box_click.config(image=ip_box_image)
+        ip_container_image = PhotoImage(file='../image/ip_container.png')
+        ip_container_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
+        ip_container_click.place(x=125, y=180)
+        ip_container_click.config(image=ip_container_image)
 
-        use_whether_box_image = PhotoImage(file='../image/use_whether_box.png')
-        use_whether_box_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
-        use_whether_box_click.place(x=125, y=500)
-        use_whether_box_click.config(image=use_whether_box_image)
+        self.pc_ip_change = Label(text='10. 96. 0. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.pc_ip_change.place(x=200, y=300)
+        self.pc_ip_first_text = Label(text='255. 255. 248. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.pc_ip_first_text.place(x=200, y=350)
+        self.pc_ip_second_text = Label(text='10. 96. 120. 254', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.pc_ip_second_text.place(x=200, y=400)
+
+        self.phone_ip_change = Label(text='10. 96. 0. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.phone_ip_change.place(x=580, y=300)
+        self.phone_ip_first_text = Label(text='255. 255. 248. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.phone_ip_first_text.place(x=580, y=350)
+        self.phone_ip_second_text = Label(text='10. 96. 120. 254', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.phone_ip_second_text.place(x=580, y=400)
+
+        self.search_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
+        self.search_ip_text.place(x=220, y=540)
+
+        self.search_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
+        self.search_ip_text.place(x=600, y=540)
 
         self.window.mainloop()
 
