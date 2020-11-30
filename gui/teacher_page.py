@@ -1,4 +1,5 @@
 from tkinter import *
+from gui.best_class_mypc import BestClassMypc
 
 class TeacherPage:
     def __init__(self):
@@ -42,3 +43,4 @@ class TeacherPage:
 
     def go_best_class_page(self):
         self.window.destroy()
+        BestClassMypc()
