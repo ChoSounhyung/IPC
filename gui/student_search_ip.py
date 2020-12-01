@@ -1,8 +1,6 @@
 from tkinter import *
-import tkinter as tk
-from tkinter import ttk
 import pymysql
-
+import socket
 
 class SearchIp:
     def __init__(self):
@@ -14,6 +12,8 @@ class SearchIp:
         self.new_s = StringVar()
         self.new_ip = StringVar()
         self.new_phone = StringVar()
+        self.check_ip = StringVar()
+        self.check_phone = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.question.place(x=125, y=50)
@@ -45,11 +45,17 @@ class SearchIp:
         self.phone_ip_change = Label(textvariable=self.new_phone, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.phone_ip_change.place(x=580, y=300)
 
-        self.search_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
-        self.search_ip_text.place(x=220, y=540)
+        self.check_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
+        self.check_ip_text.place(x=220, y=540)
 
-        self.search_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
-        self.search_ip_text.place(x=600, y=540)
+        self.check_ip_change = Label(textvariable=self.check_ip, bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
+        self.check_ip_change.place(x=350, y=540)
+
+        self.check_phone_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
+        self.check_phone_text.place(x=600, y=540)
+
+        self.check_phone_change = Label(textvariable=self.check_phone, bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
+        self.check_phone_change.place(x=750, y=540)
 
         self.window.mainloop()
 
@@ -63,9 +69,29 @@ class SearchIp:
         data_list = list(rows[0])
         new_ip = data_list[1]
         new_phone = data_list[2]
+
         self.update(new_ip,new_phone)
+        self.check_internet(new_ip,new_phone)
 
 
     def update(self,*data):
         self.new_ip.set(data[0])
         self.new_phone.set(data[1])
+
+
+    def check_internet(self,ip,phone):
+        try :
+            socket.gethostbyaddr(ip)
+            self.check_ip.set("O")
+            print("connected")
+        except socket.herror :
+            self.check_ip.set("X")
+            print("Not connected")
+
+        try :
+            socket.gethostbyaddr(phone)
+            self.check_phone.set("O")
+            print("connected")
+        except socket.herror :
+            self.check_phone.set("X")
+            print ("Unknown host")
