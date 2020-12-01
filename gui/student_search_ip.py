@@ -35,11 +35,15 @@ class SearchIp:
         self.pc_ip_first_text.place(x=200, y=350)
         self.pc_ip_second_text = Label(text='10. 96. 120. 254', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.pc_ip_second_text.place(x=200, y=400)
+        self.pc_ip_change = Label(textvariable=self.new_ip, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.pc_ip_change.place(x=200, y=300)
 
         self.phone_ip_first_text = Label(text='255. 255. 248. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.phone_ip_first_text.place(x=580, y=350)
         self.phone_ip_second_text = Label(text='10. 96. 120. 254', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.phone_ip_second_text.place(x=580, y=400)
+        self.phone_ip_change = Label(textvariable=self.new_phone, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.phone_ip_change.place(x=580, y=300)
 
         self.search_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
         self.search_ip_text.place(x=220, y=540)
@@ -61,10 +65,7 @@ class SearchIp:
         new_phone = data_list[2]
         self.update(new_ip,new_phone)
 
+
     def update(self,*data):
-        self.new_ip = data[0]
-        self.pc_ip_change = Label(text=self.new_ip, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
-        self.pc_ip_change.place(x=200, y=300)
-        self.new_phone = data[1]
-        self.phone_ip_change = Label(text=self.new_phone, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
-        self.phone_ip_change.place(x=580, y=300)
+        self.new_ip.set(data[0])
+        self.new_phone.set(data[1])
