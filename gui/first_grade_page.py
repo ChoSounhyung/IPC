@@ -24,7 +24,7 @@ class FirstGradePage:
 
         x = ['1반', '2반', '3반', '4반', '5반', '6반']
         y = [class_1, class_2, class_3, class_4, class_5, class_6]
-        plt.bar(x, y, color='c')
+        plt.bar(x, y, color='#FF6347')
         fig = plt.figure(1)
 
         canvas = FigureCanvasTkAgg(fig, self.window)
