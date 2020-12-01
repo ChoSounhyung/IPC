@@ -1,4 +1,5 @@
 from tkinter import *
+import pymysql
 
 class MyPc:
     def __init__(self):
@@ -7,9 +8,14 @@ class MyPc:
         self.window.geometry("1000x650+250+70")
         self.window.config(bg='#272727')
         self.window.resizable(False, False)
+        self.new_s = StringVar()
+        self.new_row = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.question.place(x=80, y=50)
+
+        self.ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.new_s)
+        self.ent.place(x=80, y=90)
 
         search_btn_image = PhotoImage(file='../image/search_btn.png')
         search_btn_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
@@ -19,8 +25,14 @@ class MyPc:
         self.this_month_text = Label(text='This Month', bg='#272727', fg='#F6D875', font=("Arial 18 bold"))
         self.this_month_text.place(x=80, y=200)
 
+        #new row
+        self.this_month_change = Label(textvariable=self.new_row, bg='#272727', fg='#F6D875', font=("Arial 18 bold"))
+        self.this_month_change.place(x=80, y=230)
+
+
         self.input_classof = Label(text='학번을 입력하세요(ex.1101)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.input_classof.place(x=80, y=350)
+
 
         self.input_score = Label(text='점수를 입력하세요(ex.100)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.input_score.place(x=450, y=350)
@@ -35,5 +47,27 @@ class MyPc:
     def submit(self):
         pass
 
+    def update(self,this_month,hakbun,score,reason):
+        if(reason=="empty") :
+            self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}')
+        else :
+            self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}\t{reason}')
+
     def search(self):
-        pass
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        cursor = mydb.cursor()
+        hakbun = self.new_s.get()
+        query = "select this_month,hakbun,score,reason from mypc_table where hakbun=%s"
+        try :
+            cursor.execute(query, (hakbun))
+            rows = cursor.fetchall()
+            data_list = list(rows[0])
+            #데이터 분할
+            this_month = data_list[0]
+            hakbun = data_list[1]
+            score = data_list[2]
+            reason = data_list[3]
+            self.update(this_month, hakbun, score, reason)
+        except :
+            self.update("해당하는 데이터가 없습니다.","","","")
+
