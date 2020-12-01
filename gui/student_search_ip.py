@@ -27,7 +27,7 @@ class SearchIp:
         search_btn_click.config(image=search_btn_image)
 
         ip_container_image = PhotoImage(file='../image/ip_container.png')
-        ip_container_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
+        ip_container_click = Button(borderwidth=0, bg='#272727', activebackground='#272727')
         ip_container_click.place(x=125, y=180)
         ip_container_click.config(image=ip_container_image)
 
@@ -60,7 +60,7 @@ class SearchIp:
         self.window.mainloop()
 
     def search(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_s.get()
         query = "select hakbun,pc,phone from ip_table where hakbun=%s"
@@ -72,7 +72,6 @@ class SearchIp:
 
         self.update(new_ip,new_phone)
         self.check_internet(new_ip,new_phone)
-
 
     def update(self,*data):
         self.new_ip.set(data[0])
