@@ -24,16 +24,12 @@ class FirstGradePage:
 
         x = ['1반', '2반', '3반', '4반', '5반', '6반']
         y = [class_1, class_2, class_3, class_4, class_5, class_6]
-        plt.bar(x, y)
-        plt.show()
-        plt.gcf().canvas.draw()
-        fig = plt.figure()
-        canvas = FigureCanvasTkAgg(fig, self.window)
-        canvas.get_tk_widget().grid(row=1, column=6)
-        canvas.get_tk_widget().pack()
+        plt.bar(x, y, color='c')
+        fig = plt.figure(1)
 
-        # canvas = FigureCanvasTkAgg(fig, self.window)  #
-        # canvas.get_tk_widget().grid(column=0, row=1)  #
+        canvas = FigureCanvasTkAgg(fig, self.window)
+        canvas.draw()
+        canvas.get_tk_widget().place(x=180, y=120)
 
         self.window.mainloop()
 
