@@ -1,6 +1,6 @@
 from tkinter import *
 from gui.start_page import StartPage
-from gui.student_page import StudentPage
+from gui.student_menu import StudentPage
 from gui.teacher_page import TeacherPage
 
 def main():

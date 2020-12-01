@@ -1,7 +1,7 @@
 from tkinter import *
-from gui.search_ip_page import SearchIp
+from gui.student_search_ip import SearchIp
 #from gui.start_page import StartPage
-from gui.mypc_page import MyPc
+from gui.student_mypc_page import MyPc
 
 class StudentPage:
     def __init__(self):

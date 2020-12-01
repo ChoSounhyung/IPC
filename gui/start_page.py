@@ -1,5 +1,5 @@
 from tkinter import *
-from gui.student_page import StudentPage
+from gui.student_menu import StudentPage
 from gui.teacher_page import TeacherPage
 
 class StartPage:

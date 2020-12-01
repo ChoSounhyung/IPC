@@ -12,6 +12,8 @@ class SearchIp:
         self.window.config(bg='#272727')
         self.window.resizable(False, False)
         self.new_s = StringVar()
+        self.new_ip = StringVar()
+        self.new_phone = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.question.place(x=125, y=50)
@@ -29,15 +31,11 @@ class SearchIp:
         ip_container_click.place(x=125, y=180)
         ip_container_click.config(image=ip_container_image)
 
-        self.pc_ip_change = Label(text='10. 96. 0. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
-        self.pc_ip_change.place(x=200, y=300)
         self.pc_ip_first_text = Label(text='255. 255. 248. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.pc_ip_first_text.place(x=200, y=350)
         self.pc_ip_second_text = Label(text='10. 96. 120. 254', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.pc_ip_second_text.place(x=200, y=400)
 
-        self.phone_ip_change = Label(text='10. 96. 0. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
-        self.phone_ip_change.place(x=580, y=300)
         self.phone_ip_first_text = Label(text='255. 255. 248. 0', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
         self.phone_ip_first_text.place(x=580, y=350)
         self.phone_ip_second_text = Label(text='10. 96. 120. 254', bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
@@ -64,4 +62,9 @@ class SearchIp:
         self.update(new_ip,new_phone)
 
     def update(self,*data):
-        print(data[1],data[2])
+        self.new_ip = data[0]
+        self.pc_ip_change = Label(text=self.new_ip, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.pc_ip_change.place(x=200, y=300)
+        self.new_phone = data[1]
+        self.phone_ip_change = Label(text=self.new_phone, bg='#6C6C6C', fg='#51F591', font=("Arial 22 bold"))
+        self.phone_ip_change.place(x=580, y=300)
