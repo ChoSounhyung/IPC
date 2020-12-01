@@ -46,16 +46,16 @@ class SearchIp:
         self.phone_ip_change.place(x=580, y=300)
 
         self.check_ip_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
-        self.check_ip_text.place(x=220, y=540)
+        self.check_ip_text.place(x=220, y=550)
 
         self.check_ip_change = Label(textvariable=self.check_ip, bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
-        self.check_ip_change.place(x=350, y=540)
+        self.check_ip_change.place(x=350, y=550)
 
         self.check_phone_text = Label(text='사용 여부 : ', bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
-        self.check_phone_text.place(x=600, y=540)
+        self.check_phone_text.place(x=600, y=550)
 
         self.check_phone_change = Label(textvariable=self.check_phone, bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
-        self.check_phone_change.place(x=750, y=540)
+        self.check_phone_change.place(x=750, y=550)
 
         self.window.mainloop()
 
