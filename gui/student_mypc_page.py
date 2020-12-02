@@ -55,7 +55,7 @@ class MyPc:
         self.window.mainloop()
 
     def submit(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
         new_hakbun = self.in_new_h.get()
         new_score = int(self.in_new_s.get())
@@ -98,7 +98,7 @@ class MyPc:
             self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}\t{reason}')
 
     def search(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_h.get()
         query = "select this_month,hakbun,score,reason from mypc_table where hakbun=%s"

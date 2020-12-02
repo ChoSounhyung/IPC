@@ -31,40 +31,72 @@ class FirstGradePage:
         canvas.draw()
         canvas.get_tk_widget().place(x=180, y=120)
 
+        print(y)
+
         self.window.mainloop()
 
     def db_connect(self):
         mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
 
-        query = "SELECT count(*) from mypc_table where hakbun like '11%' and score=100"
+        query = "SELECT count(*) from mypc_table where hakbun like '11%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        class_1 = (rows[0][0])
+        all_class_1 = rows[0][0]
 
-        query = "SELECT count(*) from mypc_table where hakbun like '12%' and score=100"
+        query = "SELECT sum(score) from mypc_table where hakbun like '11%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        class_2 = (rows[0][0])
+        sum_class_1 = rows[0][0] // all_class_1
 
-        query = "SELECT count(*) from mypc_table where hakbun like '13%' and score=100"
+        query = "SELECT count(*) from mypc_table where hakbun like '12%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        class_3 = (rows[0][0])
+        all_class_2 = rows[0][0]
 
-        query = "SELECT count(*) from mypc_table where hakbun like '14%' and score=100"
+        query = "SELECT sum(score) from mypc_table where hakbun like '12%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        class_4 = (rows[0][0])
+        sum_class_2 = rows[0][0] // all_class_2
 
-        query = "SELECT count(*) from mypc_table where hakbun like '15%' and score=100"
+        query = "SELECT count(*) from mypc_table where hakbun like '13%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        class_5 = (rows[0][0])
+        all_class_3 = rows[0][0]
 
-        query = "SELECT count(*) from mypc_table where hakbun like '16%' and score=100"
+        query = "SELECT sum(score) from mypc_table where hakbun like '13%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        class_6 = (rows[0][0])
+        sum_class_3 = rows[0][0] // all_class_3
 
-        return class_1, class_2, class_3, class_4, class_5, class_6
+        query = "SELECT count(*) from mypc_table where hakbun like '14%'"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        all_class_4 = rows[0][0]
+
+        query = "SELECT sum(score) from mypc_table where hakbun like '14%'"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        sum_class_4 = rows[0][0] // all_class_4
+
+        query = "SELECT count(*) from mypc_table where hakbun like '15%'"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        all_class_5 = rows[0][0]
+
+        query = "SELECT sum(score) from mypc_table where hakbun like '15%'"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        sum_class_5 = rows[0][0] // all_class_5
+
+        query = "SELECT count(*) from mypc_table where hakbun like '16%'"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        all_class_6 = rows[0][0]
+
+        query = "SELECT sum(score) from mypc_table where hakbun like '16%'"
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        sum_class_6 = rows[0][0] // all_class_6
+
+        return sum_class_1, sum_class_2, sum_class_3, sum_class_4, sum_class_5, sum_class_6
