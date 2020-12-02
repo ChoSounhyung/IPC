@@ -1,5 +1,6 @@
 from tkinter import *
 import pymysql
+import datetime
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -39,64 +40,27 @@ class FirstGradePage:
         mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
 
-        query = "SELECT count(*) from mypc_table where hakbun like '11%'"
+        query = "SELECT this_month from mypc_table where hakbun like '11%'"
         cursor.execute(query)
         rows = cursor.fetchall()
-        all_class_1 = rows[0][0]
 
-        query = "SELECT sum(score) from mypc_table where hakbun like '11%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        sum_class_1 = rows[0][0] // all_class_1
+        this_year = str(datetime.datetime.today().year)
+        this_month = str(datetime.datetime.today().month)
+        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
+        minus = str((3 - first_index) + 15)
+        dead_line = this_year+"-"+this_month+"-"+minus+" 16:30"
 
-        query = "SELECT count(*) from mypc_table where hakbun like '12%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        all_class_2 = rows[0][0]
+        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
+        print(date)
 
-        query = "SELECT sum(score) from mypc_table where hakbun like '12%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        sum_class_2 = rows[0][0] // all_class_2
+        count = 0
 
-        query = "SELECT count(*) from mypc_table where hakbun like '13%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        all_class_3 = rows[0][0]
+        for i in range(len(rows)):
+            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
+            if submit_time < date:
+                count += 1
 
-        query = "SELECT sum(score) from mypc_table where hakbun like '13%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        sum_class_3 = rows[0][0] // all_class_3
+        class_1 = count
+        print(class_1)
 
-        query = "SELECT count(*) from mypc_table where hakbun like '14%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        all_class_4 = rows[0][0]
-
-        query = "SELECT sum(score) from mypc_table where hakbun like '14%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        sum_class_4 = rows[0][0] // all_class_4
-
-        query = "SELECT count(*) from mypc_table where hakbun like '15%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        all_class_5 = rows[0][0]
-
-        query = "SELECT sum(score) from mypc_table where hakbun like '15%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        sum_class_5 = rows[0][0] // all_class_5
-
-        query = "SELECT count(*) from mypc_table where hakbun like '16%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        all_class_6 = rows[0][0]
-
-        query = "SELECT sum(score) from mypc_table where hakbun like '16%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
-        sum_class_6 = rows[0][0] // all_class_6
-
-        return sum_class_1, sum_class_2, sum_class_3, sum_class_4, sum_class_5, sum_class_6
+        return class_1
