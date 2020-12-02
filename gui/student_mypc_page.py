@@ -118,7 +118,6 @@ class MyPc:
             #print(self.value.get())
             self.popup.mainloop()
 
-            #이유 값
         else :
             reason = "empty"
         print(reason,result)
