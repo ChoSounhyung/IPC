@@ -1,6 +1,7 @@
 from tkinter import *
 import pymysql
 import datetime
+import math
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -9,6 +10,15 @@ import matplotlib
 
 matplotlib.rcParams['font.family']='Malgun Gothic'
 matplotlib.rcParams['axes.unicode_minus'] = False
+
+this_year = datetime.datetime.today().year
+this_month = datetime.datetime.today().month
+first_index = datetime.date(this_year, this_month, 1).weekday()  # 매달 1일의 인덱스
+minus = (3 - first_index) + 15
+
+date = datetime.datetime(this_year, this_month, minus, 16, 30, 0)
+pre_date = datetime.datetime(this_year, this_month, minus, 0, 0, 0)
+print(pre_date)
 
 class FirstGradePage:
     def __init__(self):
@@ -23,8 +33,11 @@ class FirstGradePage:
 
         class_1, class_2, class_3, class_4, class_5, class_6 = self.db_connect()
 
-        x = ['1반', '2반', '3반', '4반', '5반', '6반']
-        y = [class_1, class_2, class_3, class_4, class_5, class_6]
+        a = [int(class_1), int(class_2), int(class_3), int(class_4), int(class_5), int(class_6)]
+        print(a)
+
+        x = [1, 2, 3, 4, 5, 6]
+        y = [a[0], a[1], a[2], a[3], a[4], a[5]]
         plt.bar(x, y, color='#FF6347')
         fig = plt.figure(1)
 
@@ -44,132 +57,130 @@ class FirstGradePage:
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        this_year = str(datetime.datetime.today().year)
-        this_month = str(datetime.datetime.today().month)
-        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
-        minus = str((3 - first_index) + 15)
-        dead_line = this_year+"-"+this_month+"-"+minus+" 16:30"
-
-        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
-
-        count = 0
+        time_sum = 0
 
         for i in range(len(rows)):
-            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
-            if submit_time < date:
-                count += 1
+            slice_year = int(rows[i][0][:4])
+            slice_month = int(rows[i][0][5:7])
+            slice_day = int(rows[i][0][8:10])
+            slice_hour = int(rows[i][0][11:13])
+            slice_minute = int(rows[i][0][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
-        class_1 = count
-        print(class_1)
+            if pre_date <= submit_time:
+                time_sum += round((date - submit_time).microseconds / float(1000000)) + (
+                        (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
+
+        avg = time_sum // 720
+        class_1 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '12%'"
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        this_year = str(datetime.datetime.today().year)
-        this_month = str(datetime.datetime.today().month)
-        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
-        minus = str((3 - first_index) + 15)
-        dead_line = this_year + "-" + this_month + "-" + minus + " 16:30"
-
-        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
-
-        count = 0
+        time_sum = 0
 
         for i in range(len(rows)):
-            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
-            if submit_time < date:
-                count += 1
+            slice_year = int(rows[i][0][:4])
+            slice_month = int(rows[i][0][5:7])
+            slice_day = int(rows[i][0][8:10])
+            slice_hour = int(rows[i][0][11:13])
+            slice_minute = int(rows[i][0][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
-        class_2 = count
-        print(class_2)
+            if pre_date <= submit_time:
+                time_sum += round((date - submit_time).microseconds / float(1000000)) + (
+                        (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
+
+        avg = time_sum // 720
+        class_2 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '13%'"
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        this_year = str(datetime.datetime.today().year)
-        this_month = str(datetime.datetime.today().month)
-        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
-        minus = str((3 - first_index) + 15)
-        dead_line = this_year + "-" + this_month + "-" + minus + " 16:30"
-
-        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
-
-        count = 0
+        time_sum = 0
 
         for i in range(len(rows)):
-            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
-            if submit_time < date:
-                count += 1
+            slice_year = int(rows[i][0][:4])
+            slice_month = int(rows[i][0][5:7])
+            slice_day = int(rows[i][0][8:10])
+            slice_hour = int(rows[i][0][11:13])
+            slice_minute = int(rows[i][0][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
-        class_3 = count
-        print(class_3)
+            if pre_date <= submit_time:
+                time_sum += round((date - submit_time).microseconds / float(1000000)) + (
+                        (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
+
+        avg = time_sum // 720
+        class_3 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '14%'"
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        this_year = str(datetime.datetime.today().year)
-        this_month = str(datetime.datetime.today().month)
-        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
-        minus = str((3 - first_index) + 15)
-        dead_line = this_year + "-" + this_month + "-" + minus + " 16:30"
-
-        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
-
-        count = 0
+        time_sum = 0
 
         for i in range(len(rows)):
-            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
-            if submit_time < date:
-                count += 1
+            slice_year = int(rows[i][0][:4])
+            slice_month = int(rows[i][0][5:7])
+            slice_day = int(rows[i][0][8:10])
+            slice_hour = int(rows[i][0][11:13])
+            slice_minute = int(rows[i][0][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
-        class_4 = count
-        print(class_4)
+            if pre_date <= submit_time:
+                time_sum += round((date - submit_time).microseconds / float(1000000)) + (
+                        (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
+
+        avg = time_sum // 720
+        class_4 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '15%'"
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        this_year = str(datetime.datetime.today().year)
-        this_month = str(datetime.datetime.today().month)
-        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
-        minus = str((3 - first_index) + 15)
-        dead_line = this_year + "-" + this_month + "-" + minus + " 16:30"
-
-        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
-
-        count = 0
+        time_sum = 0
 
         for i in range(len(rows)):
-            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
-            if submit_time < date:
-                count += 1
+            slice_year = int(rows[i][0][:4])
+            slice_month = int(rows[i][0][5:7])
+            slice_day = int(rows[i][0][8:10])
+            slice_hour = int(rows[i][0][11:13])
+            slice_minute = int(rows[i][0][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
-        class_5 = count
-        print(class_5)
+            if pre_date <= submit_time:
+                time_sum += round((date - submit_time).microseconds / float(1000000)) + (
+                        (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
+
+        avg = time_sum // 720
+        class_5 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '16%'"
         cursor.execute(query)
         rows = cursor.fetchall()
 
-        this_year = str(datetime.datetime.today().year)
-        this_month = str(datetime.datetime.today().month)
-        first_index = datetime.date(int(this_year), int(this_month), 1).weekday()  # 매달 1일의 인덱스
-        minus = str((3 - first_index) + 15)
-        dead_line = this_year + "-" + this_month + "-" + minus + " 16:30"
-
-        date = datetime.datetime.strptime(dead_line, "%Y-%m-%d %H:%M")
-
-        count = 0
+        time_sum = 0
 
         for i in range(len(rows)):
-            submit_time = datetime.datetime.strptime(rows[i][0], "%Y-%m-%d %H:%M")
-            if submit_time < date:
-                count += 1
+            slice_year = int(rows[i][0][:4])
+            slice_month = int(rows[i][0][5:7])
+            slice_day = int(rows[i][0][8:10])
+            slice_hour = int(rows[i][0][11:13])
+            slice_minute = int(rows[i][0][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
-        class_6 = count
-        print(class_6)
+            if pre_date <= submit_time:
+                time_sum += round((date - submit_time).microseconds / float(1000000)) + (
+                            (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
+                print(round((date - submit_time).microseconds / float(1000000)) + (
+                        (date - submit_time).seconds + (date - submit_time).days * 24 * 3600))
+
+
+        avg = time_sum//720
+        class_6 = str(avg)
+
 
         return class_1, class_2, class_3, class_4, class_5, class_6

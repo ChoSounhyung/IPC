@@ -20,3 +20,10 @@ else:
     print(str(this_year) + "-" + str(this_month) + "-" + str(minus))
 
 print(minus)
+
+s = "2020-01-25 16:30"
+print(s[0:4])
+print(s[5:7])
+print(s[8:10])
+print(s[11:13])
+print(s[14:])
