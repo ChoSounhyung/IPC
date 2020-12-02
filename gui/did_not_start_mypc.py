@@ -48,6 +48,10 @@ class DidNotStartMyPc :
             self.trv.insert('', 'end', values=i,tag='style')
 
 
+    # 안한 사람 뽑아오기
+    # 학번 리스트를 만들어 그 안에 해당하는 학번이 데이터베이스에 존재하지 않으면
+    # 학번 가져오기
+    #
 
 
     #db connect
