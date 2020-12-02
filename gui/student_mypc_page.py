@@ -55,9 +55,6 @@ class MyPc:
 
         self.window.mainloop()
 
-    def popup_window(self):
-        pass
-
     def cleanup(self,new_hakbun, new_score, result):
         reason = self.e.get()
         print(reason)
