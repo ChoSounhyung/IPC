@@ -1,7 +1,6 @@
 from tkinter import *
 import pymysql
 import datetime
-import math
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -34,7 +33,6 @@ class FirstGradePage:
         class_1, class_2, class_3, class_4, class_5, class_6 = self.db_connect()
 
         a = [int(class_1), int(class_2), int(class_3), int(class_4), int(class_5), int(class_6)]
-        print(a)
 
         x = [1, 2, 3, 4, 5, 6]
         y = [a[0], a[1], a[2], a[3], a[4], a[5]]
