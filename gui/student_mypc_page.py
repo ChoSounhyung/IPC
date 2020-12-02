@@ -54,8 +54,10 @@ class MyPc:
 
         self.window.mainloop()
 
+
+
     def submit(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
         new_hakbun = self.in_new_h.get()
         new_score = int(self.in_new_s.get())
@@ -71,8 +73,9 @@ class MyPc:
         now = datetime.datetime.now()
         this_month = now.strftime('%Y-%m-%d %H:%M')
         if(new_score<100) :
-            #reason 입력받기
-            reason = "아직 코드 안채워짐"
+            #이유 값
+            reason = popupWindow(self.window)
+            print(reason)
         else :
             reason = "empty"
         print(reason,result)
@@ -99,7 +102,7 @@ class MyPc:
             self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}\t{reason}')
 
     def search(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_h.get()
         query = "select this_month,hakbun,score,reason from mypc_table where hakbun=%s"
@@ -116,3 +119,24 @@ class MyPc:
         except :
             self.show_row("해당하는 데이터가 없습니다.", "", "", "")
 
+class popupWindow:
+    def __init__(self, master):
+        self.popup = Tk()
+        self.popup.title("이유를 입력하세요.")
+        self.popup.geometry("300x150+620+320")
+        self.popup.config(bg='#ffffff')
+        self.popup.resizable(False, False)
+        self.l = Label(self.popup, text="이유를 입력하세요.", bg="#ffffff", font=("Arial 10 bold"))
+        self.l.place(x=90, y=10)
+        self.e = Entry(self.popup, bg="#E5E5E5")
+        self.e.insert(0, '이유를 입력하세요')
+        self.e.place(x=80, y=50)
+        self.b = Button(self.popup, text="등록", command=self.cleanup)
+        self.b.place(x=130, y=100)
+
+        self.popup.mainloop()
+    def cleanup(self):
+        self.value=self.e.get()
+        self.popup.destroy()
+
+        return str(self.value)
