@@ -49,7 +49,7 @@ class NotPerfectMypc :
         # db connect
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT hakbun, this_month, score, reason from mypc_table where 0<score and score<100"
