@@ -2,7 +2,7 @@ import pymysql as MySQLdb
 import xlrd
 
 tumbler = xlrd.open_workbook("data/mypc_dummy.xlsx")
-sheet = tumbler.sheet_by_name("Sheet3")
+sheet = tumbler.sheet_by_name("Sheet1")
 database = MySQLdb.connect(host="localhost",user="root",password="s2019w36",db="ipc")
 
 cursor = database.cursor()
