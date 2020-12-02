@@ -13,6 +13,7 @@ class MyPc:
         self.new_row = StringVar()
         self.in_new_h = StringVar()
         self.in_new_s = StringVar()
+        self.value = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.question.place(x=80, y=50)
@@ -54,7 +55,36 @@ class MyPc:
 
         self.window.mainloop()
 
+    def popup_window(self):
+        pass
 
+    def cleanup(self,new_hakbun, new_score, result):
+        reason = self.e.get()
+        print(reason)
+        self.popup.destroy()
+
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        cursor = mydb.cursor()
+
+        now = datetime.datetime.now()
+        this_month = now.strftime('%Y-%m-%d %H:%M')
+
+        if (result == 0):  # 데이터가 존재하지 않을 때 - insert
+            query = "insert into mypc_table values(%s,%s,%s,%s)"
+            cursor.execute(query, (new_hakbun, this_month, new_score, reason))
+            mydb.commit()
+            student_query = "UPDATE student_table SET check_mypc= %s where hakbun = %s"
+            cursor.execute(student_query,("O",new_hakbun))
+            mydb.commit()
+        else:  # 데이터가 존재할 때 - update
+            query = "UPDATE mypc_table SET score=%s where hakbun = %s"
+            cursor.execute(query, (new_score, new_hakbun))
+            #이유 업데이트
+            query = "UPDATE mypc_table SET reason=%s where hakbun = %s"
+            cursor.execute(query, (reason, new_hakbun))
+            query = "UPDATE mypc_table set this_month = %s where hakbun = %s"
+            cursor.execute(query,(this_month,new_hakbun))
+            mydb.commit()
 
     def submit(self):
         mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
@@ -72,10 +102,25 @@ class MyPc:
         #이번 달 구하기
         now = datetime.datetime.now()
         this_month = now.strftime('%Y-%m-%d %H:%M')
+        reason = ""
         if(new_score<100) :
+            self.popup = Tk()
+            self.popup.title("이유를 입력하세요.")
+            self.popup.geometry("300x150+620+320")
+            self.popup.config(bg='#ffffff')
+            self.popup.resizable(False, False)
+
+            self.l = Label(self.popup, text="이유를 입력하세요.", bg="#ffffff", font=("Arial 10 bold"))
+            self.l.place(x=90, y=10)
+            self.e = Entry(self.popup, bg="#E5E5E5", textvariable=self.value)
+            self.e.insert(0, '이유를 입력하세요')
+            self.e.place(x=80, y=50)
+            self.b = Button(self.popup, text="등록", command=lambda : self.cleanup(new_hakbun, new_score, result))
+            self.b.place(x=130, y=100)
+            #print(self.value.get())
+            self.popup.mainloop()
+
             #이유 값
-            reason = popupWindow(self.window)
-            print(reason)
         else :
             reason = "empty"
         print(reason,result)
@@ -92,6 +137,8 @@ class MyPc:
             #이유 업데이트
             query = "UPDATE mypc_table SET reason=%s where hakbun = %s"
             cursor.execute(query, (reason, new_hakbun))
+            query = "UPDATE mypc_table set this_month = %s where hakbun = %s"
+            cursor.execute(query,(this_month,new_hakbun))
             mydb.commit()
 
 
@@ -118,25 +165,3 @@ class MyPc:
             self.show_row(this_month, hakbun, score, reason)
         except :
             self.show_row("해당하는 데이터가 없습니다.", "", "", "")
-
-class popupWindow:
-    def __init__(self, master):
-        self.popup = Tk()
-        self.popup.title("이유를 입력하세요.")
-        self.popup.geometry("300x150+620+320")
-        self.popup.config(bg='#ffffff')
-        self.popup.resizable(False, False)
-        self.l = Label(self.popup, text="이유를 입력하세요.", bg="#ffffff", font=("Arial 10 bold"))
-        self.l.place(x=90, y=10)
-        self.e = Entry(self.popup, bg="#E5E5E5")
-        self.e.insert(0, '이유를 입력하세요')
-        self.e.place(x=80, y=50)
-        self.b = Button(self.popup, text="등록", command=self.cleanup)
-        self.b.place(x=130, y=100)
-
-        self.popup.mainloop()
-    def cleanup(self):
-        self.value=self.e.get()
-        self.popup.destroy()
-
-        return str(self.value)
