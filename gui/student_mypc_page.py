@@ -101,19 +101,20 @@ class MyPc:
         this_month = now.strftime('%Y-%m-%d %H:%M')
         reason = ""
         if(new_score<100) :
+
             self.popup = Tk()
             self.popup.title("이유를 입력하세요.")
             self.popup.geometry("300x150+620+320")
             self.popup.config(bg='#ffffff')
-            self.popup.resizable(False, False)
+            #self.popup.resizable(False, False)
 
             self.l = Label(self.popup, text="이유를 입력하세요.", bg="#ffffff", font=("Arial 10 bold"))
-            self.l.place(x=90, y=10)
-            self.e = Entry(self.popup, bg="#E5E5E5", textvariable=self.value)
+            self.l.place(x=90, y=35)
+            self.e = Entry(self.popup, bg="#E5E5E5", textvariable=self.value, width=27)
             self.e.insert(0, '이유를 입력하세요')
-            self.e.place(x=80, y=50)
+            self.e.place(x=30, y=80)
             self.b = Button(self.popup, text="등록", command=lambda : self.cleanup(new_hakbun, new_score, result))
-            self.b.place(x=130, y=100)
+            self.b.place(x=235, y=75)
             #print(self.value.get())
             self.popup.mainloop()
 
