@@ -1,3 +1,4 @@
+import datetime
 from tkinter import *
 from tkinter import ttk
 import pymysql
@@ -31,7 +32,7 @@ class NotPerfectMypc :
         self.trv.heading(1, text='학번', anchor="center")
 
         self.trv.column("#2", width=200, anchor="center")
-        self.trv.heading(2, text='이번 달', anchor="center")
+        self.trv.heading(2, text='제출 시간', anchor="center")
 
         self.trv.column("#3", width=200, anchor="center")
         self.trv.heading(3, text='score', anchor="center")
@@ -52,7 +53,10 @@ class NotPerfectMypc :
         mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
 
-        query = "SELECT hakbun, this_month, score, reason from mypc_table where 0<score and score<100"
-        cursor.execute(query)
+        query = "SELECT hakbun, this_month, score, reason from mypc_table where 0<score and score<100 and this_month like %s"
+
+        now = datetime.datetime.now()
+        this_month = str(now.strftime('%Y-%m'))+"%"
+        cursor.execute(query,(this_month))
         rows = cursor.fetchall()
         self.update(rows)
