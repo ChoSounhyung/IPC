@@ -1,5 +1,6 @@
 from tkinter import *
 import pymysql
+import datetime
 
 class MyPc:
     def __init__(self):
@@ -8,13 +9,15 @@ class MyPc:
         self.window.geometry("1000x650+250+70")
         self.window.config(bg='#272727')
         self.window.resizable(False, False)
-        self.new_s = StringVar()
+        self.new_h = StringVar()
         self.new_row = StringVar()
+        self.in_new_h = StringVar()
+        self.in_new_s = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.question.place(x=80, y=50)
 
-        self.ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.new_s)
+        self.ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.new_h)
         self.ent.place(x=80, y=90)
 
         search_btn_image = PhotoImage(file='../image/search_btn.png')
@@ -33,9 +36,16 @@ class MyPc:
         self.input_classof = Label(text='학번을 입력하세요(ex.1101)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.input_classof.place(x=80, y=350)
 
+        #insert hakbun
+        self.classof_ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.in_new_h)
+        self.classof_ent.place(x=80, y=390)
 
         self.input_score = Label(text='점수를 입력하세요(ex.100)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.input_score.place(x=450, y=350)
+
+        #insert score
+        self.score_ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.in_new_s)
+        self.score_ent.place(x=450, y=390)
 
         submit_btn_image = PhotoImage(file='../image/submit_btn.png')
         submit_btn_click = Button(borderwidth=0, command=self.submit, bg='#272727', activebackground='#272727')
@@ -45,9 +55,43 @@ class MyPc:
         self.window.mainloop()
 
     def submit(self):
-        pass
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        cursor = mydb.cursor()
+        new_hakbun = self.in_new_h.get()
+        new_score = int(self.in_new_s.get())
+        print(new_hakbun,new_score)
+        query = "select exists (select * from mypc_table where hakbun=%s) as success"
 
-    def update(self,this_month,hakbun,score,reason):
+        cursor.execute(query, (new_hakbun))
+        rows = cursor.fetchall()
+        data_list = list(rows[0])
+        # 데이터 분할
+        result = data_list[0]
+        #이번 달 구하기
+        this_month = str(datetime.date.today().year) + '.' + str(datetime.date.today().month)
+        if(new_score<100) :
+            #reason 입력받기
+            reason = "아직 코드 안채워짐"
+        else :
+            reason = "empty"
+        print(reason,result)
+        if (result == 0):  # 데이터가 존재하지 않을 때 - insert
+            query = "insert into mypc_table values(%s,%s,%s,%s)"
+            cursor.execute(query, (new_hakbun, this_month, new_score, reason))
+            mydb.commit()
+            student_query = "UPDATE student_table SET check_mypc= %s where hakbun = %s"
+            cursor.execute(student_query,("O",new_hakbun))
+            mydb.commit()
+        else:  # 데이터가 존재할 때 - update
+            query = "UPDATE mypc_table SET score=%s where hakbun = %s"
+            cursor.execute(query, (new_score, new_hakbun))
+            #이유 업데이트
+            query = "UPDATE mypc_table SET reason=%s where hakbun = %s"
+            cursor.execute(query, (reason, new_hakbun))
+            mydb.commit()
+
+
+    def show_row(self, this_month, hakbun, score, reason):
         if(reason=="empty") :
             self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}')
         else :
@@ -56,7 +100,7 @@ class MyPc:
     def search(self):
         mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
-        hakbun = self.new_s.get()
+        hakbun = self.new_h.get()
         query = "select this_month,hakbun,score,reason from mypc_table where hakbun=%s"
         try :
             cursor.execute(query, (hakbun))
@@ -67,7 +111,7 @@ class MyPc:
             hakbun = data_list[1]
             score = data_list[2]
             reason = data_list[3]
-            self.update(this_month, hakbun, score, reason)
+            self.show_row(this_month, hakbun, score, reason)
         except :
-            self.update("해당하는 데이터가 없습니다.","","","")
+            self.show_row("해당하는 데이터가 없습니다.", "", "", "")
 
