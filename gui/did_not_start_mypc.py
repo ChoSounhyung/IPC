@@ -79,7 +79,6 @@ class DidNotStartMyPc :
             if start_date > submit_time or end_date < submit_time:
                 submit_time_list.append(rows[i][0])
 
-
         self.update(submit_time_list)
 
     def go_back(self):

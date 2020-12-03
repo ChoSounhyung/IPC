@@ -2,6 +2,7 @@ import datetime
 from tkinter import *
 from tkinter import ttk
 from DB.db_connect import DbConnect
+from model.cal_time import CalTime
 
 db_connect = DbConnect()
 
@@ -61,17 +62,33 @@ class NotPerfectMypc :
         for i in rows:
             self.trv.insert('', 'end', values=i, tag='style')
 
-        # db connect
-
+    # db connect
     def db_connect(self):
+        cal_time = CalTime()
 
-        query = "SELECT hakbun, this_month, score, reason from mypc_table where 0<score and score<100 and this_month like %s"
+        start_date = cal_time.start_date
+        pre_after_month = cal_time.pre_after_month
+        print(pre_after_month)
 
-        now = datetime.datetime.now()
-        this_month = str(now.strftime('%Y-%m'))+"%"
-        db_connect.cursor.execute(query,(this_month))
+        query = "SELECT hakbun, this_month, score, reason from mypc_table where 0<score and score<100"
+
+        db_connect.cursor.execute(query)
         rows = db_connect.cursor.fetchall()
-        self.update(rows)
+
+        submit_time_list = []
+
+        for i in range(len(rows)):
+            slice_year = int(rows[i][1][:4])
+            slice_month = int(rows[i][1][5:7])
+            slice_day = int(rows[i][1][8:10])
+            slice_hour = int(rows[i][1][11:13])
+            slice_minute = int(rows[i][1][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
+
+            if start_date < submit_time and pre_after_month > submit_time:
+                submit_time_list.append([rows[i][0], rows[i][1], rows[i][2], rows[i][3]])
+
+        self.update(submit_time_list)
 
     def go_back(self):
         from gui.teacher_menu import TeacherMenu

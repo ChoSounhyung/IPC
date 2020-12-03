@@ -12,10 +12,12 @@ class CalTime:
         this_year = datetime.datetime.today().year
         this_month = datetime.datetime.today().month
         first_index = datetime.date(this_year, this_month, 1).weekday()  # 매달 1일의 인덱스
-        minus = (3 - first_index) + 15
+        third_week_index = (3 - first_index) + 15
+        pre_third_week_index = (2 - first_index) + 15
 
-        self.end_date = datetime.datetime(this_year, this_month, minus, 16, 30, 0)
-        self.start_date = datetime.datetime(this_year, this_month, minus, 0, 0, 0)
+        self.end_date = datetime.datetime(this_year, this_month, third_week_index, 16, 30, 0)
+        self.start_date = datetime.datetime(this_year, this_month, third_week_index, 0, 0, 0)
+        self.pre_after_month = datetime.datetime(this_year+1, this_month-11, pre_third_week_index, 23, 59, 59)
 
     def calculate(self, query):
         self.db_connect.cursor.execute(query)
