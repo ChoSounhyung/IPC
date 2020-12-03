@@ -23,7 +23,7 @@ class StartPage:
 
         teacher_image = PhotoImage(file='../image/teacher_btn.png')
         teacher_click = Button(borderwidth=0, command=self.go_teacher_page, bg='#ffffff', activebackground='#ffffff')
-        teacher_click.place(x=320, y=360)
+        teacher_click.place(x=330, y=360)
         teacher_click.config(image=teacher_image)
 
         self.window.mainloop()
