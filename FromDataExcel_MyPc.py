@@ -1,3 +1,5 @@
+import datetime
+
 import xlrd
 
 from DB.db_connect import DbConnect
@@ -12,10 +14,12 @@ query = """INSERT INTO mypc_table (hakbun,this_month,score,reason) VALUES (%s,%s
 for r in range(1,sheet.nrows) :
     hakbun = sheet.cell(r,0).value
     this_month = sheet.cell(r,1).value
+    seconds = (this_month - 25569) * 86400.0
+    d = datetime.datetime.utcfromtimestamp(seconds).strftime("%Y-%m-%d %H:%M")
     score = sheet.cell(r,2).value
     reason = sheet.cell(r, 3).value
 
-    values = (hakbun,this_month,score,reason)
+    values = (hakbun,d,score,reason)
 
     db_connect.cursor.execute(query,values)
 
