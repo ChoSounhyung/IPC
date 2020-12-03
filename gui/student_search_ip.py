@@ -17,14 +17,14 @@ class SearchIp:
         self.check_phone = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"))
-        self.question.place(x=125, y=50)
+        self.question.place(x=125, y=80)
 
         self.ent = Entry(bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"),textvariable=self.new_s)
-        self.ent.place(x=125, y=90)
+        self.ent.place(x=125, y=120)
 
         search_btn_image = PhotoImage(file='../image/search_btn.png')
         search_btn_click = Button(borderwidth=0, command=self.search, bg='#ffffff', activebackground='#ffffff')
-        search_btn_click.place(x=805, y=50)
+        search_btn_click.place(x=805, y=80)
         search_btn_click.config(image=search_btn_image)
 
         ip_container_image = PhotoImage(file='../image/ip_container.png')
@@ -69,7 +69,7 @@ class SearchIp:
 
         self.warning()
 
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_s.get()
         query = "select hakbun,pc,phone from ip_table where hakbun=%s"
