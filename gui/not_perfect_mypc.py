@@ -85,7 +85,9 @@ class NotPerfectMypc :
             slice_minute = int(rows[i][1][14:])
             submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
+            # 이번달 셋째주 목요일 00:00:00 ~ 다음달 셋째주 수요일 23:59:59 사이에 제출했으면
             if start_date < submit_time and pre_after_month > submit_time:
+                # 100점이 아닌사람의 행을 넣음
                 submit_time_list.append([rows[i][0], rows[i][1], rows[i][2], rows[i][3]])
 
         self.update(submit_time_list)

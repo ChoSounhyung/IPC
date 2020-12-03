@@ -1,5 +1,4 @@
 from tkinter import *
-import pymysql
 import socket
 import tkinter as tk
 from DB.db_connect import DbConnect
@@ -70,8 +69,7 @@ class SearchIp:
 
     def search(self):
 
-        self.warning()
-
+        self.warning()      #경고창
 
         hakbun = self.new_s.get()
         query = "select hakbun,pc,phone from ip_table where hakbun=%s"
@@ -84,12 +82,12 @@ class SearchIp:
         self.update(new_ip,new_phone)
         self.check_internet(new_ip,new_phone)
 
-
+    # 공백을 새로운 ip로 바꿈
     def update(self,*data):
         self.new_ip.set(data[0])
         self.new_phone.set(data[1])
 
-
+    # ip 사용여부
     def check_internet(self,ip,phone):
         try :
             socket.gethostbyaddr(ip)

@@ -76,6 +76,7 @@ class DidNotStartMyPc :
             slice_minute = int(rows[i][1][14:])
             submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
 
+            # 제출 기한 안에 안했으면
             if start_date > submit_time or end_date < submit_time:
                 submit_time_list.append(rows[i][0])
 

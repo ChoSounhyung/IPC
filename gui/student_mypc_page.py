@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import messagebox
-import pymysql
 import tkinter as tk
 import datetime
 
@@ -143,8 +142,6 @@ class MyPc:
 
             self.info()
 
-
-
     def show_row(self, this_month, hakbun, score, reason):
         if(reason=="empty") :
             self.new_row.set(f'{this_month}\t    {hakbun}\t    {score}')
@@ -152,9 +149,6 @@ class MyPc:
             self.new_row.set(f'{this_month}\t    {hakbun}\t    {score}\t    {reason}')
 
     def search(self):
-
-        self.warning()
-
         hakbun = self.new_h.get()
         query = "select this_month,hakbun,score,reason from mypc_table where hakbun=%s"
         try :
