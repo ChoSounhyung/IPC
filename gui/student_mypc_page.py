@@ -16,47 +16,47 @@ class MyPc:
         self.value = StringVar()
 
         self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
-        self.question.place(x=80, y=50)
+        self.question.place(x=80, y=100)
 
         self.ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.new_h)
-        self.ent.place(x=80, y=90)
+        self.ent.place(x=80, y=140)
 
         search_btn_image = PhotoImage(file='../image/search_btn.png')
         search_btn_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
-        search_btn_click.place(x=805, y=50)
+        search_btn_click.place(x=805, y=100)
         search_btn_click.config(image=search_btn_image)
 
         self.this_month_text = Label(text='This Month', bg='#272727', fg='#F6D875', font=("Arial 18 bold"))
-        self.this_month_text.place(x=80, y=200)
+        self.this_month_text.place(x=80, y=250)
 
         #new row
         self.this_month_change = Label(textvariable=self.new_row, bg='#272727', fg='#F6D875', font=("Arial 18 bold"))
-        self.this_month_change.place(x=80, y=230)
+        self.this_month_change.place(x=80, y=280)
 
 
         self.input_classof = Label(text='학번을 입력하세요(ex.1101)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
-        self.input_classof.place(x=80, y=350)
+        self.input_classof.place(x=80, y=400)
 
         #insert hakbun
         self.classof_ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.in_new_h)
-        self.classof_ent.place(x=80, y=390)
+        self.classof_ent.place(x=80, y=440)
 
         self.input_score = Label(text='점수를 입력하세요(ex.100)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
-        self.input_score.place(x=450, y=350)
+        self.input_score.place(x=450, y=400)
 
         #insert score
         self.score_ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.in_new_s)
-        self.score_ent.place(x=450, y=390)
+        self.score_ent.place(x=450, y=440)
 
         submit_btn_image = PhotoImage(file='../image/submit_btn.png')
         submit_btn_click = Button(borderwidth=0, command=self.submit, bg='#272727', activebackground='#272727')
-        submit_btn_click.place(x=800, y=350)
+        submit_btn_click.place(x=800, y=400)
         submit_btn_click.config(image=submit_btn_image)
 
-        home_image = PhotoImage(file='../image/home_btn.png')
-        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
-        home_click.place(x=50, y=600, anchor='nw')
-        home_click.config(image=home_image)
+        back_image = PhotoImage(file='../image/back_icon.png')
+        back_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        back_click.place(x=40, y=20, anchor='nw')
+        back_click.config(image=back_image)
 
         self.window.mainloop()
 

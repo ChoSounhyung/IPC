@@ -45,15 +45,15 @@ class FirstGradePage:
 
         print(y)
 
-        home_image = PhotoImage(file='../image/home_btn.png')
-        home_click = Button(borderwidth=0, command=self.go_menu, bg='#272727', activebackground='#272727')
-        home_click.place(x=50, y=600, anchor='nw')
-        home_click.config(image=home_image)
+        back_image = PhotoImage(file='../image/back_icon.png')
+        back_click = Button(borderwidth=0, command=self.go_menu, bg='#272727', activebackground='#272727')
+        back_click.place(x=40, y=20, anchor='nw')
+        back_click.config(image=back_image)
 
         self.window.mainloop()
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT this_month from mypc_table where hakbun like '11%'"

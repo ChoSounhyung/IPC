@@ -57,10 +57,10 @@ class SearchIp:
         self.check_phone_change = Label(textvariable=self.check_phone, bg='#6C6C6C', fg='#F64F4F', font=("Arial 18 bold"))
         self.check_phone_change.place(x=750, y=550)
 
-        home_image = PhotoImage(file='../image/home_btn.png')
-        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
-        home_click.place(x=50, y=600, anchor='nw')
-        home_click.config(image=home_image)
+        back_image = PhotoImage(file='../image/back_icon.png')
+        back_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        back_click.place(x=40, y=20, anchor='nw')
+        back_click.config(image=back_image)
 
         self.window.mainloop()
 

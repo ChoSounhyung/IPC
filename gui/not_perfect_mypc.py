@@ -42,10 +42,10 @@ class NotPerfectMypc :
         self.trv.column("#4", width=300, anchor="center")
         self.trv.heading(4, text='reason', anchor="center")
 
-        home_image = PhotoImage(file='../image/home_btn.png')
-        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
-        home_click.place(x=50, y=600, anchor='nw')
-        home_click.config(image=home_image)
+        back_image = PhotoImage(file='../image/back_icon.png')
+        back_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        back_click.place(x=40, y=20, anchor='nw')
+        back_click.config(image=back_image)
 
         self.window.mainloop()
 

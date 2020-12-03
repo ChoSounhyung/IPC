@@ -36,10 +36,10 @@ class TeacherMenu:
         self.best_class_text = Label(text='반별 내 PC 지키미\n점수 비율을\n볼 수 있습니다', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.best_class_text.place(x=725, y=400)
 
-        home_image = PhotoImage(file='../image/home_btn.png')
-        home_click = Button(borderwidth=0, command=self.go_start_page, bg='#272727', activebackground='#272727')
-        home_click.place(x=50, y=600, anchor='nw')
-        home_click.config(image=home_image)
+        back_image = PhotoImage(file='../image/back_icon.png')
+        back_click = Button(borderwidth=0, command=self.go_start_page, bg='#272727', activebackground='#272727')
+        back_click.place(x=40, y=20, anchor='nw')
+        back_click.config(image=back_image)
 
         self.window.mainloop()
 
