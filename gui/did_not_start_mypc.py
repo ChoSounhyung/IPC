@@ -30,6 +30,11 @@ class DidNotStartMyPc :
         self.trv.column("#1", width=200, anchor="center")
         self.trv.heading(1, text='학번', anchor="center")
 
+        home_image = PhotoImage(file='../image/home_btn.png')
+        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        home_click.place(x=50, y=600, anchor='nw')
+        home_click.config(image=home_image)
+
         self.window.mainloop()
 
 
@@ -37,13 +42,6 @@ class DidNotStartMyPc :
         self.trv.delete(*self.trv.get_children())
         for i in rows:
             self.trv.insert('', 'end', values=i,tag='style')
-
-
-    # 안한 사람 뽑아오기
-    # 학번 리스트를 만들어 그 안에 해당하는 학번이 데이터베이스에 존재하지 않으면
-    # 학번 가져오기
-    #
-
 
     #db connect
     def db_connect(self) :
@@ -54,3 +52,8 @@ class DidNotStartMyPc :
         cursor.execute(query,("X"))
         rows = cursor.fetchall()
         self.update(rows)
+
+    def go_back(self):
+        from gui.teacher_menu import TeacherMenu
+        self.window.destroy()
+        TeacherMenu()

@@ -26,6 +26,11 @@ class BestClassMypc:
         third_grade_click.place(x=700, y=200)
         third_grade_click.config(image=third_grade_image)
 
+        home_image = PhotoImage(file='../image/home_btn.png')
+        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        home_click.place(x=50, y=600, anchor='nw')
+        home_click.config(image=home_image)
+
         self.window.mainloop()
 
     def go_first_grade_page(self):
@@ -39,3 +44,8 @@ class BestClassMypc:
     def go_third_grade_page(self):
         self.window.destroy()
         ThirdGradePage()
+
+    def go_back(self):
+        from gui.teacher_menu import TeacherMenu
+        self.window.destroy()
+        TeacherMenu()
