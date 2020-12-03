@@ -45,10 +45,15 @@ class ThirdGradePage:
 
         print(y)
 
+        home_image = PhotoImage(file='../image/home_btn.png')
+        home_click = Button(borderwidth=0, command=self.go_menu, bg='#272727', activebackground='#272727')
+        home_click.place(x=50, y=600, anchor='nw')
+        home_click.config(image=home_image)
+
         self.window.mainloop()
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT this_month from mypc_table where hakbun like '31%'"
@@ -180,3 +185,8 @@ class ThirdGradePage:
         class_6 = str(avg)
 
         return class_1, class_2, class_3, class_4, class_5, class_6
+
+    def go_menu(self):
+        from gui.best_class_mypc import BestClassMypc
+        self.window.destroy()
+        BestClassMypc()

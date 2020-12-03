@@ -40,6 +40,11 @@ class NotPerfectMypc :
         self.trv.column("#4", width=300, anchor="center")
         self.trv.heading(4, text='reason', anchor="center")
 
+        home_image = PhotoImage(file='../image/home_btn.png')
+        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        home_click.place(x=50, y=600, anchor='nw')
+        home_click.config(image=home_image)
+
         self.window.mainloop()
 
     def update(self, rows):
@@ -60,3 +65,8 @@ class NotPerfectMypc :
         cursor.execute(query,(this_month))
         rows = cursor.fetchall()
         self.update(rows)
+
+    def go_back(self):
+        from gui.teacher_menu import TeacherMenu
+        self.window.destroy()
+        TeacherMenu()

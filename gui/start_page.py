@@ -1,6 +1,6 @@
 from tkinter import *
-from gui.student_menu import StudentPage
-from gui.teacher_page import TeacherPage
+from gui.student_menu import StudentMenu
+from gui.teacher_menu import TeacherMenu
 
 class StartPage:
     def __init__(self):
@@ -30,8 +30,8 @@ class StartPage:
 
     def go_student_page(self):
         self.window.destroy()
-        StudentPage()
+        StudentMenu()
 
     def go_teacher_page(self):
         self.window.destroy()
-        TeacherPage()
+        TeacherMenu()

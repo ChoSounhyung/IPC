@@ -53,6 +53,11 @@ class MyPc:
         submit_btn_click.place(x=800, y=350)
         submit_btn_click.config(image=submit_btn_image)
 
+        home_image = PhotoImage(file='../image/home_btn.png')
+        home_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        home_click.place(x=50, y=600, anchor='nw')
+        home_click.config(image=home_image)
+
         self.window.mainloop()
 
     def cleanup(self,new_hakbun, new_score, result):
@@ -162,3 +167,8 @@ class MyPc:
             self.show_row(this_month, hakbun, score, reason)
         except :
             self.show_row("해당하는 데이터가 없습니다.", "", "", "")
+
+    def go_back(self):
+        from gui.student_menu import StudentMenu
+        self.window.destroy()
+        StudentMenu()

@@ -3,7 +3,8 @@ from gui.did_not_start_mypc import DidNotStartMyPc
 from gui.best_class_mypc import BestClassMypc
 from gui.not_perfect_mypc import NotPerfectMypc
 
-class TeacherPage:
+
+class TeacherMenu:
     def __init__(self):
         self.window = Tk()
         self.window.title("IPC")
@@ -35,6 +36,11 @@ class TeacherPage:
         self.best_class_text = Label(text='반별 내 PC 지키미\n점수 비율을\n볼 수 있습니다', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
         self.best_class_text.place(x=725, y=400)
 
+        home_image = PhotoImage(file='../image/home_btn.png')
+        home_click = Button(borderwidth=0, command=self.go_start_page, bg='#272727', activebackground='#272727')
+        home_click.place(x=50, y=600, anchor='nw')
+        home_click.config(image=home_image)
+
         self.window.mainloop()
 
     def go_did_not_start_page(self):
@@ -48,3 +54,8 @@ class TeacherPage:
     def go_best_class_page(self):
         self.window.destroy()
         BestClassMypc()
+
+    def go_start_page(self):
+        from gui.start_page import StartPage
+        self.window.destroy()
+        StartPage()
