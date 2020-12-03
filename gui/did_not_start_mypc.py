@@ -18,7 +18,9 @@ class DidNotStartMyPc :
 
         self.trv.place(x=50,y=150)
 
-        vsb = ttk.Scrollbar(orient="vertical", command=self.trv.yview)
+        vsb = ttk.Scrollbar(self.window, orient="vertical", command=self.trv.yview)
+        vsb.place(x=35 + 200 + 2, y=125, height=200 + 20)
+
         self.trv.configure(yscrollcommand=vsb.set)
 
         style = ttk.Style()
