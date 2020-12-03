@@ -13,8 +13,8 @@ class DidNotStartMyPc :
         self.db_connect()
 
         did_not_start_mypc = Label(text='내 PC 지키미를 안한 사람', bg='#ffffff', fg='#3F90CA',
-                                    font=("Arial 15 bold"))
-        did_not_start_mypc.place(x=200, y=100)
+                                    font=("Arial 18 bold"))
+        did_not_start_mypc.place(x=175, y=100)
 
         self.trv.place(x=200,y=170)
 
@@ -37,6 +37,11 @@ class DidNotStartMyPc :
         back_click = Button(borderwidth=0, command=self.go_back, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
+
+        gagamel_image = PhotoImage(file='../image/smurf/gagamel_image.png')
+        gagamel_label = Button(borderwidth=0, bg='#ffffff', activebackground='#ffffff')
+        gagamel_label.place(x=530, y=100)
+        gagamel_label.config(image=gagamel_image)
 
         self.window.mainloop()
 
