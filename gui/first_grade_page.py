@@ -24,10 +24,10 @@ class FirstGradePage:
         self.window = Tk()
         self.window.title("IPC")
         self.window.geometry("1000x650+250+70")
-        self.window.config(bg='#272727')
+        self.window.config(bg='#ffffff')
         self.window.resizable(False, False)
 
-        self.mypc_text = Label(text='[1학년] 이달의 우수반', bg='#272727', fg='#ffffff', font=("Arial 18 bold"))
+        self.mypc_text = Label(text='[1학년] 이달의 우수반', bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"))
         self.mypc_text.place(x=390, y=50)
 
         class_1, class_2, class_3, class_4, class_5, class_6 = self.db_connect()
@@ -46,14 +46,14 @@ class FirstGradePage:
         print(y)
 
         back_image = PhotoImage(file='../image/back_icon.png')
-        back_click = Button(borderwidth=0, command=self.go_menu, bg='#272727', activebackground='#272727')
+        back_click = Button(borderwidth=0, command=self.go_menu, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
 
         self.window.mainloop()
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT this_month from mypc_table where hakbun like '11%'"

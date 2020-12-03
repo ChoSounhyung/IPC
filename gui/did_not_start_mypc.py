@@ -7,25 +7,26 @@ class DidNotStartMyPc :
         self.window = Tk()
         self.window.title("IPC")
         self.window.geometry("1000x650+250+70")
-        self.window.config(bg='#272727')
+        self.window.config(bg='#ffffff')
         self.window.resizable(False, False)
         self.trv = ttk.Treeview(columns=(1), show="headings", height="10")
         self.db_connect()
 
-        did_not_start_mypc = Label(text='내 PC 지키미를 안한 사람', bg='#272727', fg='#51F591',
+        did_not_start_mypc = Label(text='내 PC 지키미를 안한 사람', bg='#ffffff', fg='#3F90CA',
                                     font=("Arial 15 bold"))
         did_not_start_mypc.place(x=50, y=70)
 
-        self.trv.place(x=50,y=150)
+        self.trv.place(x=200,y=150)
 
         vsb = ttk.Scrollbar(self.window, orient="vertical", command=self.trv.yview)
-        vsb.place(x=35 + 200 + 2, y=125, height=200 + 20)
+        vsb.place(x=200 + 200 + 2, y=140, height=420 + 20)
 
         self.trv.configure(yscrollcommand=vsb.set)
 
         style = ttk.Style()
         style.configure("Treeview.Heading", font=("Arial 15 bold"))
         style.configure("Treeview", rowheight=40)
+        style.configure("Treeview", background="#3F90CA")
 
         self.trv.tag_configure('style',font=("Arial 15"))
 
@@ -47,7 +48,7 @@ class DidNotStartMyPc :
 
     #db connect
     def db_connect(self) :
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT hakbun from student_table where check_mypc = %s"

@@ -7,7 +7,7 @@ class MyPc:
         self.window = Tk()
         self.window.title("IPC")
         self.window.geometry("1000x650+250+70")
-        self.window.config(bg='#272727')
+        self.window.config(bg='#ffffff')
         self.window.resizable(False, False)
         self.new_h = StringVar()
         self.new_row = StringVar()
@@ -15,46 +15,46 @@ class MyPc:
         self.in_new_s = StringVar()
         self.value = StringVar()
 
-        self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#272727', fg='#51F591', font=("Arial 18 bold"))
+        self.question = Label(text="학번을 입력하세요(ex.1101)", bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"))
         self.question.place(x=80, y=100)
 
-        self.ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.new_h)
+        self.ent = Entry(bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"), textvariable=self.new_h)
         self.ent.place(x=80, y=140)
 
         search_btn_image = PhotoImage(file='../image/search_btn.png')
-        search_btn_click = Button(borderwidth=0, command=self.search, bg='#272727', activebackground='#272727')
+        search_btn_click = Button(borderwidth=0, command=self.search, bg='#ffffff', activebackground='#ffffff')
         search_btn_click.place(x=805, y=100)
         search_btn_click.config(image=search_btn_image)
 
-        self.this_month_text = Label(text='This Month', bg='#272727', fg='#F6D875', font=("Arial 18 bold"))
+        self.this_month_text = Label(text='This Month', bg='#ffffff', fg='#F6D875', font=("Arial 18 bold"))
         self.this_month_text.place(x=80, y=250)
 
         #new row
-        self.this_month_change = Label(textvariable=self.new_row, bg='#272727', fg='#F6D875', font=("Arial 18 bold"))
+        self.this_month_change = Label(textvariable=self.new_row, bg='#ffffff', fg='#F6D875', font=("Arial 18 bold"))
         self.this_month_change.place(x=80, y=280)
 
 
-        self.input_classof = Label(text='학번을 입력하세요(ex.1101)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
+        self.input_classof = Label(text='학번을 입력하세요(ex.1101)', bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"))
         self.input_classof.place(x=80, y=400)
 
         #insert hakbun
-        self.classof_ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.in_new_h)
+        self.classof_ent = Entry(bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"), textvariable=self.in_new_h)
         self.classof_ent.place(x=80, y=440)
 
-        self.input_score = Label(text='점수를 입력하세요(ex.100)', bg='#272727', fg='#51F591', font=("Arial 18 bold"))
+        self.input_score = Label(text='점수를 입력하세요(ex.100)', bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"))
         self.input_score.place(x=450, y=400)
 
         #insert score
-        self.score_ent = Entry(bg='#272727', fg='#51F591', font=("Arial 18 bold"), textvariable=self.in_new_s)
+        self.score_ent = Entry(bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"), textvariable=self.in_new_s)
         self.score_ent.place(x=450, y=440)
 
         submit_btn_image = PhotoImage(file='../image/submit_btn.png')
-        submit_btn_click = Button(borderwidth=0, command=self.submit, bg='#272727', activebackground='#272727')
+        submit_btn_click = Button(borderwidth=0, command=self.submit, bg='#ffffff', activebackground='#ffffff')
         submit_btn_click.place(x=800, y=400)
         submit_btn_click.config(image=submit_btn_image)
 
         back_image = PhotoImage(file='../image/back_icon.png')
-        back_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        back_click = Button(borderwidth=0, command=self.go_back, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
 
@@ -65,7 +65,7 @@ class MyPc:
         print(reason)
         self.popup.destroy()
 
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
 
         now = datetime.datetime.now()
@@ -89,7 +89,7 @@ class MyPc:
             mydb.commit()
 
     def submit(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
         new_hakbun = self.in_new_h.get()
         new_score = int(self.in_new_s.get())
@@ -151,7 +151,7 @@ class MyPc:
             self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}\t{reason}')
 
     def search(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_h.get()
         query = "select this_month,hakbun,score,reason from mypc_table where hakbun=%s"
