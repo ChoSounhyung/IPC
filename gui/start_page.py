@@ -12,7 +12,7 @@ class StartPage:
 
         self.title = Label(text="IPC", bg='#ffffff', fg='#3F90CA', font=("Arial 60 bold"))
         self.explain = Label(text=": IP 검색과 내 PC 지키미 결과를 제출, 확인해보아요!", bg='#ffffff', fg='#3F90CA',
-                        font=("System 13 normal"))
+                        font=("System 15 bold"))
         self.title.place(x=110, y=180, anchor='nw')
         self.explain.place(x=110, y=270, anchor='nw')
 
