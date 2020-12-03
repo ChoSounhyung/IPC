@@ -1,5 +1,7 @@
 from tkinter import *
+from tkinter import messagebox
 import pymysql
+import tkinter as tk
 import datetime
 
 class MyPc:
@@ -26,7 +28,7 @@ class MyPc:
         search_btn_click.place(x=805, y=100)
         search_btn_click.config(image=search_btn_image)
 
-        self.this_month_text = Label(text='This Month', bg='#ffffff', fg='#F6D875', font=("Arial 18 bold"))
+        self.this_month_text = Label(text='제출시간\t\t    학번\t    점수\t    이유', bg='#ffffff', fg='#F6D875', font=("Arial 18 bold"))
         self.this_month_text.place(x=80, y=250)
 
         #new row
@@ -88,6 +90,8 @@ class MyPc:
             cursor.execute(query,(this_month,new_hakbun))
             mydb.commit()
 
+        self.info()
+
     def submit(self):
         mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
@@ -125,30 +129,34 @@ class MyPc:
 
         else :
             reason = "empty"
-        print(reason,result)
-        if (result == 0):  # 데이터가 존재하지 않을 때 - insert
-            query = "insert into mypc_table values(%s,%s,%s,%s)"
-            cursor.execute(query, (new_hakbun, this_month, new_score, reason))
-            mydb.commit()
-            student_query = "UPDATE student_table SET check_mypc= %s where hakbun = %s"
-            cursor.execute(student_query,("O",new_hakbun))
-            mydb.commit()
-        else:  # 데이터가 존재할 때 - update
-            query = "UPDATE mypc_table SET score=%s where hakbun = %s"
-            cursor.execute(query, (new_score, new_hakbun))
-            #이유 업데이트
-            query = "UPDATE mypc_table SET reason=%s where hakbun = %s"
-            cursor.execute(query, (reason, new_hakbun))
-            query = "UPDATE mypc_table set this_month = %s where hakbun = %s"
-            cursor.execute(query,(this_month,new_hakbun))
-            mydb.commit()
+            print(reason,result)
+            if (result == 0):  # 데이터가 존재하지 않을 때 - insert
+                query = "insert into mypc_table values(%s,%s,%s,%s)"
+                cursor.execute(query, (new_hakbun, this_month, new_score, reason))
+                mydb.commit()
+                student_query = "UPDATE student_table SET check_mypc= %s where hakbun = %s"
+                cursor.execute(student_query,("O",new_hakbun))
+                mydb.commit()
+
+            else:  # 데이터가 존재할 때 - update
+                query = "UPDATE mypc_table SET score=%s where hakbun = %s"
+                cursor.execute(query, (new_score, new_hakbun))
+                #이유 업데이트
+                query = "UPDATE mypc_table SET reason=%s where hakbun = %s"
+                cursor.execute(query, (reason, new_hakbun))
+                query = "UPDATE mypc_table set this_month = %s where hakbun = %s"
+                cursor.execute(query,(this_month,new_hakbun))
+                mydb.commit()
+
+            self.info()
+
 
 
     def show_row(self, this_month, hakbun, score, reason):
         if(reason=="empty") :
-            self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}')
+            self.new_row.set(f'{this_month}\t    {hakbun}\t    {score}')
         else :
-            self.new_row.set(f'{this_month}\t\t{hakbun}\t{score}\t{reason}')
+            self.new_row.set(f'{this_month}\t    {hakbun}\t    {score}\t    {reason}')
 
     def search(self):
         mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
@@ -172,3 +180,6 @@ class MyPc:
         from gui.student_menu import StudentMenu
         self.window.destroy()
         StudentMenu()
+
+    def info(self):
+        tk.messagebox.showinfo("info", "  제출되었습니다!\t")
