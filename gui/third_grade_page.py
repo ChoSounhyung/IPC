@@ -27,7 +27,7 @@ class ThirdGradePage:
         self.window.config(bg='#272727')
         self.window.resizable(False, False)
 
-        self.mypc_text = Label(text='[1학년] 이달의 우수반', bg='#272727', fg='#ffffff', font=("Arial 18 bold"))
+        self.mypc_text = Label(text='[3학년] 이달의 우수반', bg='#272727', fg='#ffffff', font=("Arial 18 bold"))
         self.mypc_text.place(x=390, y=50)
 
         class_1, class_2, class_3, class_4, class_5, class_6 = self.db_connect()
