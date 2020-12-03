@@ -1,7 +1,9 @@
 import datetime
 from tkinter import *
 from tkinter import ttk
-import pymysql
+from DB.db_connect import DbConnect
+
+db_connect = DbConnect()
 
 class NotPerfectMypc :
     def __init__(self):
@@ -62,15 +64,13 @@ class NotPerfectMypc :
         # db connect
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
-        cursor = mydb.cursor()
 
         query = "SELECT hakbun, this_month, score, reason from mypc_table where 0<score and score<100 and this_month like %s"
 
         now = datetime.datetime.now()
         this_month = str(now.strftime('%Y-%m'))+"%"
-        cursor.execute(query,(this_month))
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query,(this_month))
+        rows = db_connect.cursor.fetchall()
         self.update(rows)
 
     def go_back(self):
