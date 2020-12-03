@@ -2,6 +2,10 @@ from tkinter import *
 from tkinter import ttk
 import pymysql
 
+from DB.db_connect import DbConnect
+
+db_connect = DbConnect()
+
 class DidNotStartMyPc :
     def __init__(self):
         self.window = Tk()
@@ -53,12 +57,11 @@ class DidNotStartMyPc :
 
     #db connect
     def db_connect(self) :
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
-        cursor = mydb.cursor()
+
 
         query = "SELECT hakbun from student_table where check_mypc = %s"
-        cursor.execute(query,("X"))
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query,("X"))
+        rows = db_connect.cursor.fetchall()
         self.update(rows)
 
     def go_back(self):

@@ -1,9 +1,10 @@
 from tkinter import *
+import pymysql
 import socket
 import tkinter as tk
-
 from DB.db_connect import DbConnect
 
+db_connect = DbConnect()
 
 class SearchIp:
     def __init__(self):
@@ -71,7 +72,7 @@ class SearchIp:
 
         self.warning()
 
-        db_connect = DbConnect()
+
         hakbun = self.new_s.get()
         query = "select hakbun,pc,phone from ip_table where hakbun=%s"
         db_connect.cursor.execute(query, (hakbun))
