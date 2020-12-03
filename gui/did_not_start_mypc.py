@@ -47,7 +47,7 @@ class DidNotStartMyPc :
 
     #db connect
     def db_connect(self) :
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT hakbun from student_table where check_mypc = %s"
