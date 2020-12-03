@@ -1,8 +1,9 @@
+import datetime
 from tkinter import *
 from tkinter import ttk
-import pymysql
 
 from DB.db_connect import DbConnect
+from model.cal_time import CalTime
 
 db_connect = DbConnect()
 
@@ -49,20 +50,37 @@ class DidNotStartMyPc :
 
         self.window.mainloop()
 
-
     def update(self,rows) :
         self.trv.delete(*self.trv.get_children())
         for i in rows:
-            self.trv.insert('', 'end', values=i,tag='style')
+            self.trv.insert('', 'end', values=i, tag='style')
 
     #db connect
     def db_connect(self) :
+        cal_time = CalTime()
 
+        start_date = cal_time.start_date
+        end_date = cal_time.end_date
 
-        query = "SELECT hakbun from student_table where check_mypc = %s"
-        db_connect.cursor.execute(query,("X"))
+        query = "SELECT hakbun, this_month from mypc_table"
+        db_connect.cursor.execute(query)
         rows = db_connect.cursor.fetchall()
-        self.update(rows)
+
+        submit_time_list = []
+
+        for i in range(len(rows)):
+            slice_year = int(rows[i][1][:4])
+            slice_month = int(rows[i][1][5:7])
+            slice_day = int(rows[i][1][8:10])
+            slice_hour = int(rows[i][1][11:13])
+            slice_minute = int(rows[i][1][14:])
+            submit_time = datetime.datetime(slice_year, slice_month, slice_day, slice_hour, slice_minute)
+
+            if start_date > submit_time or end_date < submit_time:
+                submit_time_list.append(rows[i][0])
+
+
+        self.update(submit_time_list)
 
     def go_back(self):
         from gui.teacher_menu import TeacherMenu
