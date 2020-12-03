@@ -20,7 +20,7 @@ class NotPerfectMypc :
         self.trv.place(x=50, y=170)
 
         vsb = ttk.Scrollbar(self.window, orient="vertical", command=self.trv.yview)
-        vsb.place(x=730 + 200 + 2, y=170, height=200 + 20)
+        vsb.place(x=730 + 200 + 2, y=173, height=400 + 20)
 
         self.trv.configure(yscrollcommand=vsb.set)
 
@@ -46,6 +46,11 @@ class NotPerfectMypc :
         back_click = Button(borderwidth=0, command=self.go_back, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
+
+        smurfs_image = PhotoImage(file='../image/smurf/smurfs_image.png')
+        smurfs_label = Button(borderwidth=0, bg='#ffffff', activebackground='#ffffff')
+        smurfs_label.place(x=700, y=25)
+        smurfs_label.config(image=smurfs_image)
 
         self.window.mainloop()
 
