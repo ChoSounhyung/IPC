@@ -66,15 +66,8 @@ class SearchIp:
         self.window.mainloop()
 
     def search(self):
-        self.loading = tk.Toplevel()
-        self.loading.title("로딩중...")
-        self.loading.geometry("300x150+620+320")
-        self.loading.config(bg='#ffffff')
 
-        loading_image = PhotoImage(file='../image/loading_image.png')
-        loading_label = Label(self.loading, bg='#ffffff',image = loading_image)
-        loading_label.pack()
-        self.loading.mainloop()
+        self.warning()
 
         mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
@@ -89,7 +82,6 @@ class SearchIp:
         self.update(new_ip,new_phone)
         self.check_internet(new_ip,new_phone)
 
-        #self.loading.destroy()
 
     def update(self,*data):
         self.new_ip.set(data[0])
@@ -117,3 +109,6 @@ class SearchIp:
         from gui.student_menu import StudentMenu
         self.window.destroy()
         StudentMenu()
+
+    def warning(self):
+        tk.messagebox.showwarning("warning", "10초만 기다려주세요!")

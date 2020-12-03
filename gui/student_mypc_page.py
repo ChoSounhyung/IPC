@@ -159,6 +159,9 @@ class MyPc:
             self.new_row.set(f'{this_month}\t    {hakbun}\t    {score}\t    {reason}')
 
     def search(self):
+
+        self.warning()
+
         mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_h.get()
@@ -183,3 +186,6 @@ class MyPc:
 
     def info(self):
         tk.messagebox.showinfo("info", "  제출되었습니다!\t")
+
+    def warning(self):
+        tk.messagebox.showwarning("warning", "3초만 기다려주세요!")
