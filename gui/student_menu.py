@@ -1,7 +1,6 @@
 from tkinter import *
 
 from gui.student_search_ip import SearchIp
-#from gui.start_page import StartPage
 from gui.student_mypc_page import MyPc
 
 class StudentMenu:

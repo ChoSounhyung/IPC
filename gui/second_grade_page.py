@@ -7,6 +7,10 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import matplotlib
 
+from DB.db_connect import DbConnect
+
+db_connect = DbConnect()
+
 matplotlib.rcParams['font.family']='Malgun Gothic'
 matplotlib.rcParams['axes.unicode_minus'] = False
 
@@ -53,12 +57,10 @@ class SecondGradePage:
         self.window.mainloop()
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
-        cursor = mydb.cursor()
 
         query = "SELECT this_month from mypc_table where hakbun like '21%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query)
+        rows = db_connect.cursor.fetchall()
 
         time_sum = 0
 
@@ -78,8 +80,8 @@ class SecondGradePage:
         class_1 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '22%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query)
+        rows = db_connect.cursor.fetchall()
 
         time_sum = 0
 
@@ -99,8 +101,8 @@ class SecondGradePage:
         class_2 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '23%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query)
+        rows = db_connect.cursor.fetchall()
 
         time_sum = 0
 
@@ -120,8 +122,8 @@ class SecondGradePage:
         class_3 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '24%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query)
+        rows = db_connect.cursor.fetchall()
 
         time_sum = 0
 
@@ -141,8 +143,8 @@ class SecondGradePage:
         class_4 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '25%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query)
+        rows = db_connect.cursor.fetchall()
 
         time_sum = 0
 
@@ -162,8 +164,8 @@ class SecondGradePage:
         class_5 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '26%'"
-        cursor.execute(query)
-        rows = cursor.fetchall()
+        db_connect.cursor.execute(query)
+        rows = db_connect.cursor.fetchall()
 
         time_sum = 0
 
