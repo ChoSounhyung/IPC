@@ -73,4 +73,5 @@ class SecondGradePage:
     def go_menu(self):
         from gui.best_class_mypc import BestClassMypc
         self.window.destroy()
+        plt.clf()
         BestClassMypc()

@@ -3,7 +3,6 @@ from model.cal_time import CalTime
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
-
 from DB.db_connect import DbConnect
 
 db_connect = DbConnect()
@@ -21,26 +20,27 @@ class FirstGradePage:
 
         class_1, class_2, class_3, class_4, class_5, class_6 = self.db_connect()
 
-        x = [1, 2, 3, 4, 5, 6]
-        y = [int(class_1), int(class_2), int(class_3), int(class_4), int(class_5), int(class_6)]
+        self.y = [0,0,0,0,0,0]
+        self.x = [1, 2, 3, 4, 5, 6]
+        self.y = [int(class_1), int(class_2), int(class_3), int(class_4), int(class_5), int(class_6)]
 
-        plt.bar(x, y, color='#FED971')
-        fig = plt.figure(1)
+        plt.bar(self.x, self.y, color='#FED971')
+        self.fig = plt.figure(1)
 
-        canvas = FigureCanvasTkAgg(fig, self.window)
-        canvas.draw()
-        canvas.get_tk_widget().place(x=180, y=120)
+        self.canvas = FigureCanvasTkAgg(self.fig, self.window)
+        self.canvas.draw()
+        self.canvas.get_tk_widget().place(x=180, y=120)
 
-        print(y)
+        print(self.y)
 
         back_image = PhotoImage(file='../image/back_icon.png')
         back_click = Button(borderwidth=0, command=self.go_menu, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
 
-        if ''.join(str(y)) != "000000":
-            for i in range(len(y)):
-                if y[i] == max(y) and y[i] != 0:
+        if ''.join(str(self.y)) != "000000":
+            for i in range(len(self.y)):
+                if self.y[i] == max(self.y) and self.y[i] != 0:
                     self.search_ip_text = Label(text=str(i + 1) + "반이 기한내에 가장 빨리 제출했습니다.", bg='#ffffff', fg='#3F90CA',
                                                 font=("Arial 18 bold"))
                     self.search_ip_text.place(x=300, y=100)
@@ -73,4 +73,5 @@ class FirstGradePage:
     def go_menu(self):
         from gui.best_class_mypc import BestClassMypc
         self.window.destroy()
+        plt.clf()
         BestClassMypc()
