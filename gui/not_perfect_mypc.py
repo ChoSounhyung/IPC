@@ -13,8 +13,8 @@ class NotPerfectMypc :
         self.trv = ttk.Treeview(columns=(1, 2, 3, 4), show="headings", height="10")
         self.db_connect()
 
-        did_not_start_mypc = Label(text='100점이 아닌사람', bg='#ffffff', fg='#3F90CA',
-                                   font=("Arial 15 bold"))
+        did_not_start_mypc = Label(text='100점이 아닌 사람 리스트', bg='#ffffff', fg='#3F90CA',
+                                   font=("Arial 18 bold"))
         did_not_start_mypc.place(x=50, y=100)
 
         self.trv.place(x=50, y=170)
