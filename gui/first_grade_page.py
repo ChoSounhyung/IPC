@@ -53,7 +53,7 @@ class FirstGradePage:
         self.window.mainloop()
 
     def db_connect(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT this_month from mypc_table where hakbun like '11%'"
