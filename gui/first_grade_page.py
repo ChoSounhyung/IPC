@@ -32,10 +32,10 @@ class FirstGradePage:
 
         class_1, class_2, class_3, class_4, class_5, class_6 = self.db_connect()
 
-        a = [int(class_1), int(class_2), int(class_3), int(class_4), int(class_5), int(class_6)]
+        classes = [int(class_1), int(class_2), int(class_3), int(class_4), int(class_5), int(class_6)]
 
         x = [1, 2, 3, 4, 5, 6]
-        y = [a[0], a[1], a[2], a[3], a[4], a[5]]
+        y = [classes[0], classes[1], classes[2], classes[3], classes[4], classes[5]]
         plt.bar(x, y, color='#FF6347')
         fig = plt.figure(1)
 
@@ -49,6 +49,11 @@ class FirstGradePage:
         back_click = Button(borderwidth=0, command=self.go_menu, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
+
+        for i in range(len(classes)):
+            if classes[i] == max(classes):
+                self.search_ip_text = Label(text=str(i+1) + "반이 기한내에 가장 빨리 제출했습니다.", bg='#ffffff', fg='#3F90CA', font=("Arial 18 bold"))
+                self.search_ip_text.place(x=300, y=100)
 
         self.window.mainloop()
 
@@ -74,7 +79,7 @@ class FirstGradePage:
                 time_sum += round((date - submit_time).microseconds / float(1000000)) + (
                         (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
 
-        avg = time_sum // 720
+        avg = time_sum // 990
         class_1 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '12%'"

@@ -74,7 +74,7 @@ class SecondGradePage:
                 time_sum += round((date - submit_time).microseconds / float(1000000)) + (
                         (date - submit_time).seconds + (date - submit_time).days * 24 * 3600)
 
-        avg = time_sum // 720
+        avg = time_sum // 990
         class_1 = str(avg)
 
         query = "SELECT this_month from mypc_table where hakbun like '22%'"
