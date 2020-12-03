@@ -14,12 +14,12 @@ class DidNotStartMyPc :
 
         did_not_start_mypc = Label(text='내 PC 지키미를 안한 사람', bg='#ffffff', fg='#3F90CA',
                                     font=("Arial 15 bold"))
-        did_not_start_mypc.place(x=50, y=70)
+        did_not_start_mypc.place(x=200, y=100)
 
-        self.trv.place(x=200,y=150)
+        self.trv.place(x=200,y=170)
 
         vsb = ttk.Scrollbar(self.window, orient="vertical", command=self.trv.yview)
-        vsb.place(x=200 + 200 + 2, y=140, height=420 + 20)
+        vsb.place(x=200 + 200 + 2, y=170, height=410 + 20)
 
         self.trv.configure(yscrollcommand=vsb.set)
 

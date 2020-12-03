@@ -15,12 +15,12 @@ class NotPerfectMypc :
 
         did_not_start_mypc = Label(text='100점이 아닌사람', bg='#ffffff', fg='#3F90CA',
                                    font=("Arial 15 bold"))
-        did_not_start_mypc.place(x=50, y=70)
+        did_not_start_mypc.place(x=50, y=100)
 
-        self.trv.place(x=50, y=150)
+        self.trv.place(x=50, y=170)
 
         vsb = ttk.Scrollbar(self.window, orient="vertical", command=self.trv.yview)
-        vsb.place(x=730 + 200 + 2, y=150, height=200 + 20)
+        vsb.place(x=730 + 200 + 2, y=170, height=200 + 20)
 
         self.trv.configure(yscrollcommand=vsb.set)
 
