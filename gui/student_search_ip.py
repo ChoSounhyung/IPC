@@ -1,6 +1,7 @@
 from tkinter import *
 import pymysql
 import socket
+import tkinter as tk
 
 class SearchIp:
     def __init__(self):
@@ -65,7 +66,10 @@ class SearchIp:
         self.window.mainloop()
 
     def search(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+
+        self.warning()
+
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_s.get()
         query = "select hakbun,pc,phone from ip_table where hakbun=%s"
@@ -77,6 +81,7 @@ class SearchIp:
 
         self.update(new_ip,new_phone)
         self.check_internet(new_ip,new_phone)
+
 
     def update(self,*data):
         self.new_ip.set(data[0])
@@ -104,3 +109,6 @@ class SearchIp:
         from gui.student_menu import StudentMenu
         self.window.destroy()
         StudentMenu()
+
+    def warning(self):
+        tk.messagebox.showwarning("warning", "10초만 기다려주세요!")
