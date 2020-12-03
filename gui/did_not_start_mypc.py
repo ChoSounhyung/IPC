@@ -34,7 +34,7 @@ class DidNotStartMyPc :
         self.trv.heading(1, text='학번', anchor="center")
 
         back_image = PhotoImage(file='../image/back_icon.png')
-        back_click = Button(borderwidth=0, command=self.go_back, bg='#272727', activebackground='#272727')
+        back_click = Button(borderwidth=0, command=self.go_back, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
 
@@ -48,7 +48,7 @@ class DidNotStartMyPc :
 
     #db connect
     def db_connect(self) :
-        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
+        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
         cursor = mydb.cursor()
 
         query = "SELECT hakbun from student_table where check_mypc = %s"

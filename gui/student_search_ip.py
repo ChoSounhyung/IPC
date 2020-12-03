@@ -58,7 +58,7 @@ class SearchIp:
         self.check_phone_change.place(x=750, y=550)
 
         back_image = PhotoImage(file='../image/back_icon.png')
-        back_click = Button(borderwidth=0, command=self.go_back, bg='#ffffff', activebackground='#272727')
+        back_click = Button(borderwidth=0, command=self.go_back, bg='#ffffff', activebackground='#ffffff')
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
 
