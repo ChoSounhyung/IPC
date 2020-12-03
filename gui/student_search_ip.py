@@ -1,6 +1,7 @@
 from tkinter import *
 import pymysql
 import socket
+import tkinter as tk
 
 class SearchIp:
     def __init__(self):
@@ -65,7 +66,17 @@ class SearchIp:
         self.window.mainloop()
 
     def search(self):
-        mydb = pymysql.connect(host="localhost", user="root", password="s2019w36", db="ipc")
+        self.loading = tk.Toplevel()
+        self.loading.title("로딩중...")
+        self.loading.geometry("300x150+620+320")
+        self.loading.config(bg='#ffffff')
+
+        loading_image = PhotoImage(file='../image/loading_image.png')
+        loading_label = Label(self.loading, bg='#ffffff',image = loading_image)
+        loading_label.pack()
+        self.loading.mainloop()
+
+        mydb = pymysql.connect(host="localhost", user="root", password="123456", db="ipc")
         cursor = mydb.cursor()
         hakbun = self.new_s.get()
         query = "select hakbun,pc,phone from ip_table where hakbun=%s"
@@ -77,6 +88,8 @@ class SearchIp:
 
         self.update(new_ip,new_phone)
         self.check_internet(new_ip,new_phone)
+
+        #self.loading.destroy()
 
     def update(self,*data):
         self.new_ip.set(data[0])
