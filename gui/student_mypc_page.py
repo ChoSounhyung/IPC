@@ -78,9 +78,6 @@ class MyPc:
             query = "insert into mypc_table values(%s,%s,%s,%s)"
             db_connect.cursor.execute(query, (new_hakbun, this_month, new_score, reason))
             db_connect.mydb.commit()
-            student_query = "UPDATE student_table SET check_mypc= %s where hakbun = %s"
-            db_connect.cursor.execute(student_query,("O",new_hakbun))
-            db_connect.mydb.commit()
         else:  # 데이터가 존재할 때 - update
             query = "UPDATE mypc_table SET score=%s where hakbun = %s"
             db_connect.cursor.execute(query, (new_score, new_hakbun))
@@ -132,9 +129,6 @@ class MyPc:
             if (result == 0):  # 데이터가 존재하지 않을 때 - insert
                 query = "insert into mypc_table values(%s,%s,%s,%s)"
                 db_connect.cursor.execute(query, (new_hakbun, this_month, new_score, reason))
-                db_connect.mydb.commit()
-                student_query = "UPDATE student_table SET check_mypc= %s where hakbun = %s"
-                db_connect.cursor.execute(student_query,("O",new_hakbun))
                 db_connect.mydb.commit()
 
             else:  # 데이터가 존재할 때 - update
