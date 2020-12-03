@@ -1,11 +1,11 @@
-import pymysql as MySQLdb
 import xlrd
+
+from DB.db_connect import DbConnect
 
 tumbler = xlrd.open_workbook("data/mypc_dummy.xlsx")
 sheet = tumbler.sheet_by_name("Sheet1")
-database = MySQLdb.connect(host="localhost",user="root",password="123456",db="ipc")
 
-cursor = database.cursor()
+db_connect = DbConnect()
 
 query = """INSERT INTO mypc_table (hakbun,this_month,score,reason) VALUES (%s,%s,%s,%s)"""
 
@@ -17,8 +17,8 @@ for r in range(1,sheet.nrows) :
 
     values = (hakbun,this_month,score,reason)
 
-    cursor.execute(query,values)
+    db_connect.cursor.execute(query,values)
 
-cursor.close()
-database.commit()
-database.close()
+db_connect.cursor.close()
+db_connect.mydb.commit()
+db_connect.mydb.close()

@@ -139,7 +139,7 @@ class MyPc:
 
             else:  # 데이터가 존재할 때 - update
                 query = "UPDATE mypc_table SET score=%s where hakbun = %s"
-                db_connect.ursor.execute(query, (new_score, new_hakbun))
+                db_connect.cursor.execute(query, (new_score, new_hakbun))
                 #이유 업데이트
                 query = "UPDATE mypc_table SET reason=%s where hakbun = %s"
                 db_connect.cursor.execute(query, (reason, new_hakbun))
