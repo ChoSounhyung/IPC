@@ -1,4 +1,7 @@
 from tkinter import *
+from tkinter import messagebox as mb
+import datetime
+from DB.db_connect import DbConnect
 from gui.did_not_start_mypc import DidNotStartMyPc
 from gui.best_class_mypc import BestClassMypc
 from gui.not_perfect_mypc import NotPerfectMypc
@@ -41,6 +44,12 @@ class TeacherMenu:
         back_click.place(x=40, y=20, anchor='nw')
         back_click.config(image=back_image)
 
+        delete_image = PhotoImage(file='../image/delete_file.png')
+        delete_btn = Button(borderwidth=0, command=self.delete_this_month_data, bg='#ffffff',
+                                  activebackground='#ffffff')
+        delete_btn.place(x=870, y=10, anchor='nw')
+        delete_btn.config(image=delete_image)
+
         self.window.mainloop()
 
     def go_did_not_start_page(self):
@@ -54,6 +63,19 @@ class TeacherMenu:
     def go_best_class_page(self):
         self.window.destroy()
         BestClassMypc()
+
+    def delete_this_month_data(self):
+        res = mb.askquestion('저번 달 데이터 지우기','정말 저번 달 데이터를 지우시겠습니까?')
+        if res == 'yes' :
+            db_connect = DbConnect()
+            this_month = "2020-" + str(datetime.datetime.now().month-1) + "%"
+            query = "DELETE from mypc_table where this_month like %s"
+            db_connect.cursor.execute(query, (this_month))
+            db_connect.mydb.commit()
+            mb.showinfo("데이터 삭제됨.","데이터가 성공적으로 삭제되었습니다!")
+        else :
+            return
+
 
     def go_start_page(self):
         from gui.start_page import StartPage
