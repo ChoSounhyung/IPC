@@ -18,6 +18,7 @@ class CalTime:
 
         self.end_date = datetime.datetime(this_year, this_month, third_week_index, 16, 30, 0)
         self.start_date = datetime.datetime(this_year, this_month, third_week_index, 0, 0, 0)
+        #12월이면 년도와 월이 달라짐
         if this_month == 12:
             self.pre_after_month = datetime.datetime(this_year + 1, this_month - 11, pre_third_week_index, 23, 59, 59)
         else:
